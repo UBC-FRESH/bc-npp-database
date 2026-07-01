@@ -43,3 +43,8 @@ with `ROADMAP.md`, planning notes, issue comments, and pull requests.
 - Opened pull request #13 for Phase 1 closeout.
 - Verified that pull request #13 passed CI for Python 3.11 and 3.12 before
   merge.
+- Started Phase 2 planning on `feature/p2-evidence-source-attribution` by
+  documenting optional ecosystem integration hooks for FreshForge, FEMIC BC Data
+  Catalogue workflows, and fresh-hectaresbc raster context search.
+- Kept FreshForge, FEMIC, and fresh-hectaresbc out of core dependencies while
+  recording future optional adapter and workflow-node directions.
