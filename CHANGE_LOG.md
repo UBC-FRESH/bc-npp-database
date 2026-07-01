@@ -25,3 +25,6 @@ with `ROADMAP.md`, planning notes, issue comments, and pull requests.
   `feature/p0-bootstrap-scaffold`.
 - Backfilled Phase 0 GitHub issue records: parent issue #1 and child task
   issues #2 through #5.
+- Created the empty `main` baseline branch, set it as the repository default,
+  rebased the Phase 0 branch onto that baseline, and opened pull request #6 for
+  Phase 0 closeout.

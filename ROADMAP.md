@@ -39,7 +39,7 @@ legacy artifact migration.
   - [x] Add docs Pages workflow.
   - [x] Add release artifact workflow.
   - [x] Add tests for docs configuration import sanity.
-- [ ] P0.4 Legacy artifact migration and closeout verification (#5)
+- [x] P0.4 Legacy artifact migration and closeout verification (#5)
   - [x] Track cleaned public-safe docs, schema seeds, and workbook snapshots.
   - [x] Keep raw PDFs, screenshots, private data, and local scratch ignored.
   - [x] Run local acceptance commands.
@@ -47,7 +47,7 @@ legacy artifact migration.
   - [x] Comment on child issues and parent issue with verification result, or
         record that GitHub issues are not created yet.
   - [x] Commit and push branch.
-  - [ ] Open PR to `main`.
+  - [x] Open PR to `main` (#6).
 
 Phase 0 local verification passed with:
 
@@ -58,9 +58,8 @@ Phase 0 local verification passed with:
 - `python -m build`
 - `twine check dist/*`
 
-Branch push completed for `feature/p0-bootstrap-scaffold`. Pull request creation
-is pending until the empty `main` baseline branch is created and set as the
-repository default.
+Branch push completed for `feature/p0-bootstrap-scaffold`. Pull request #6 is
+open against `main`.
 
 ## Future Phase Candidates
 
