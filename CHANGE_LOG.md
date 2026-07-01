@@ -48,3 +48,6 @@ with `ROADMAP.md`, planning notes, issue comments, and pull requests.
   Catalogue workflows, and fresh-hectaresbc raster context search.
 - Kept FreshForge, FEMIC, and fresh-hectaresbc out of core dependencies while
   recording future optional adapter and workflow-node directions.
+- Added figrecover to the P2 integration planning layer as an optional
+  media-derived evidence adapter with explicit review gates, provenance fields,
+  and public-data hygiene boundaries.

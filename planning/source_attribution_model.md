@@ -21,6 +21,8 @@ uncertain.
 * External source IDs where available
 * Materialization manifest path or URI where a public-safe manifest exists
 * Acquisition or resolution status for derived source artifacts
+* Media-derived extraction provenance where a figure, table, or image supplies
+  a candidate value
 
 ## Source Tiers
 
@@ -46,12 +48,29 @@ live downloads in normal validation. Future source records may reference:
   and artifact manifest paths.
 * HectaresBC dataset IDs, catalog family, title candidates, source ZIP paths,
   content status, and retrieval diagnostics.
+* figrecover source document IDs, page numbers, figure or table IDs, crop or
+  image IDs, extraction method, calibration settings, tool and version, QA
+  metrics, review status, reviewer notes, accepted-table paths, and extraction
+  diagnostics.
 
 These records support provenance and review. They do not, by themselves, make an
 ecological claim true or score-ready.
+
+## Media-Derived Evidence Boundary
+
+When a value is recovered from a figure, table, PDF, image, or other media,
+BC-NPPD should keep two provenance layers separate:
+
+* the original document citation that supports why the source is relevant;
+* the recovered-data artifact provenance that explains how a candidate value was
+  extracted, calibrated, reviewed, corrected, and exported.
+
+Only reviewed recovered rows should become candidate source-attribution records.
+Unreviewed, rejected, or VLM-only numeric proposals should remain local review
+artifacts and must not become canonical species facts or score inputs.
 
 ## Deferred To P2
 
 P2 should define durable source/reference dataclasses, source completeness
 checks, reference ID conventions, source-attribution validation behavior, and
-optional source materialization manifest contracts.
+optional source materialization and media-derived extraction manifest contracts.

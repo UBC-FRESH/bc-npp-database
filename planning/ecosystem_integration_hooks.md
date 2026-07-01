@@ -10,10 +10,11 @@ These hooks are planning contracts, not core runtime dependencies.
 
 ## Dependency Policy
 
-The core package should not depend on `freshforge`, `femic`, or
-`fresh-hectaresbc` during the foundation phases. Future implementation may add
-optional extras such as `.[workflow]`, `.[bcdc]`, or `.[hectaresbc]` after a
-small proof of concept validates the boundary.
+The core package should not depend on `freshforge`, `femic`,
+`fresh-hectaresbc`, or `figrecover` during the foundation phases. Future
+implementation may add optional extras such as `.[workflow]`, `.[bcdc]`,
+`.[hectaresbc]`, or `.[figrecover]` after a small proof of concept validates
+the boundary.
 
 Prefer adapter modules and example workflow records before tight imports. This
 keeps the database usable from a clean checkout and prevents public data
@@ -35,6 +36,10 @@ Planned node families:
   `score.report`.
 * Optional context nodes: `bcdc.resolve`, `bcdc.fetch_aoi`,
   `hectares.search`, `hectares.resolve`, `hectares.fetch`.
+* Optional media nodes: `media.render_pdf_pages`,
+  `media.discover_figure_candidates`, `media.crop_candidates`,
+  `media.extract_calibrated_series`, `media.qa_bundle`,
+  `media.export_accepted_tables`.
 
 Workflow outputs should include FreshForge run summaries and provider-owned
 diagnostics. Generated artifacts should stay under ignored `outputs/`, `local/`,
@@ -79,26 +84,59 @@ priorities, or diagnostic questions. They should not create species facts,
 source confidence, or score values unless a later evidence rule defines exactly
 how that layer supports the claim.
 
+## figrecover Hooks
+
+figrecover can provide optional media-derived evidence recovery when source
+values are published only inside figures, tables, PDFs, image files, or similar
+media. Candidate hook concepts include:
+
+* render selected PDF pages to ignored local page images;
+* record figure candidate manifests with page numbers, bounding boxes,
+  candidate source, confidence, and available captions;
+* crop candidate figures into image artifacts for calibrated review;
+* run deterministic calibrated extraction for supported chart types;
+* generate QA overlays, quality metrics, review manifests, and diagnostics;
+* export only accepted or manually corrected recovered tables for downstream
+  source-attribution review.
+
+BC-NPPD should consume reviewed figrecover outputs as candidate source evidence,
+not direct canonical species facts. Preferred inputs are generic long-table
+exports with JSON sidecars that preserve source document, figure, calibration,
+toolchain, diagnostics, QA, and review metadata.
+
+VLM-derived proposals may help identify chart type, labels, legends, colours,
+or calibration hints. They are review aids only. Numeric values should not be
+treated as evidence unless they come from deterministic calibration or explicit
+human correction and have an accepted review status.
+
+Source PDFs, rendered pages, image crops, VLM prompts and responses, overlays,
+review bundles, and recovered private tables must stay under ignored `local/`,
+`tmp/`, `outputs/`, or `data/raw/` paths unless explicitly sanitized and
+approved for public release.
+
 ## Evidence And Public Hygiene Rules
 
 External data integrations must preserve BC-NPPD's evidence standard:
 
 * do not invent ecological values from spatial context;
+* do not treat recovered figure or table values as authoritative without review;
 * distinguish source resolution, materialization, attribution, and review;
 * keep excluded-source checks active across source fields, manifests, workflow
   parameters, and generated summaries;
-* keep raw PDFs, screenshots, unchecked downloads, and bulk GIS/raster outputs
-  out of git;
+* keep raw PDFs, screenshots, rendered pages, image crops, VLM logs, unchecked
+  downloads, recovered private tables, and bulk GIS/raster outputs out of git;
 * track only public-safe manifests, inventories, planning notes, and reviewed
   derivatives.
 
 ## Phase Placement
 
 P2 should define the source and manifest records needed to cite external
-materials. P3 can add deterministic workflow examples for workbook-to-table and
-source-manifest joins. P4 can add scoring workflow records after evidence-aware
-score inputs exist. P5 should include documented hooks and optional dry-run
-examples, not live GIS/raster ingestion.
+materials, including review-gated media extraction manifests. P3 can add
+deterministic workflow examples for workbook-to-table, source-manifest, and
+accepted recovered-table joins. P4 can add scoring workflow records after
+evidence-aware score inputs exist. P5 should include documented hooks and
+optional dry-run examples, not live GIS/raster ingestion or media extraction.
 
 A later P6 candidate should cover external ecosystem context adapters if the
-project needs live BCDC or HectaresBC acquisition after the v1.0.0a foundation.
+project needs live BCDC, HectaresBC, or figrecover acquisition after the
+v1.0.0a foundation.

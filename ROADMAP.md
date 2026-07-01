@@ -72,9 +72,10 @@ maintainer explicitly approves a parallel lane.
 
 Potential post-foundation phase:
 
-- P6 External ecosystem context adapters: optional FreshForge, FEMIC BCDC, and
-  fresh-hectaresbc integrations for source resolution, AOI materialization,
-  raster context search, and reviewed diagnostics.
+- P6 External ecosystem and media adapters: optional FreshForge, FEMIC BCDC,
+  fresh-hectaresbc, and figrecover integrations for source resolution, AOI
+  materialization, raster context search, media-derived evidence recovery, and
+  reviewed diagnostics.
 
 ## Phase 1: Seed Archive Inventory And Normalization Contracts
 
@@ -139,7 +140,8 @@ Goal: define durable source, evidence, reference ID, and attribution records
 that support auditable ecological claims.
 
 - [ ] P2.1 Source tier and reference ID contract (TBD)
-- [ ] P2.2 Source attribution table, manifest, and validation model (TBD)
+- [ ] P2.2 Source attribution table, materialization, media-extraction manifest,
+      and validation model (TBD)
 - [ ] P2.3 Excluded-source, source-completeness, and external-ID enforcement (TBD)
 - [ ] P2.4 Integration-hook docs, examples, and closeout (TBD)
 
@@ -156,7 +158,8 @@ tables and import/export APIs while keeping generated outputs out of git unless
 explicitly approved.
 
 - [ ] P3.1 Canonical table dataclasses and schema helpers (TBD)
-- [ ] P3.2 Workbook-to-table import pipeline and manifest joins (TBD)
+- [ ] P3.2 Workbook-to-table import pipeline, accepted recovered-table inputs,
+      and manifest joins (TBD)
 - [ ] P3.3 Deterministic CSV/export and optional FreshForge workflow (TBD)
 - [ ] P3.4 Docs, examples, and closeout (TBD)
 
@@ -173,7 +176,8 @@ placeholders without inventing unsupported ecological values.
 
 - [ ] P4.1 Score vocabulary and weighting direction (TBD)
 - [ ] P4.2 Evidence-aware score calculation records (TBD)
-- [ ] P4.3 Score diagnostics, context hooks, and CLI/reporting surfaces (TBD)
+- [ ] P4.3 Score diagnostics, reviewed context/media hooks, and CLI/reporting
+      surfaces (TBD)
 - [ ] P4.4 Docs, examples, and closeout (TBD)
 
 ## Phase 5: v1.0.0a Foundation Record And Release
