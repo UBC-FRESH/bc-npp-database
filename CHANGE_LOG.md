@@ -21,3 +21,5 @@ with `ROADMAP.md`, planning notes, issue comments, and pull requests.
 - Installed a local Python 3.12 toolchain, created `.venv`, installed
   `.[dev]`, and completed Phase 0 local acceptance verification with Ruff,
   pytest, Sphinx, build, and twine checks passing.
+- Committed and pushed the Phase 0 bootstrap branch
+  `feature/p0-bootstrap-scaffold`.

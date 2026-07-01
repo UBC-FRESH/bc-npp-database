@@ -46,7 +46,7 @@ legacy artifact migration.
   - [x] Update roadmap and changelog closeout notes.
   - [x] Comment on child issues and parent issue with verification result, or
         record that GitHub issues are not created yet.
-  - [ ] Commit and push branch.
+  - [x] Commit and push branch.
   - [ ] Open PR to `main`.
 
 Phase 0 local verification passed with:
@@ -60,6 +60,10 @@ Phase 0 local verification passed with:
 
 GitHub issues are not created yet, so issue comments remain not applicable for
 this repo-side bootstrap closeout.
+
+Branch push completed for `feature/p0-bootstrap-scaffold`. Pull request creation
+is pending because the remote currently has no `main` branch and GitHub CLI is
+not installed in this shell.
 
 ## Future Phase Candidates
 
