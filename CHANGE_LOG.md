@@ -28,3 +28,5 @@ with `ROADMAP.md`, planning notes, issue comments, and pull requests.
 - Created the empty `main` baseline branch, set it as the repository default,
   rebased the Phase 0 branch onto that baseline, and opened pull request #6 for
   Phase 0 closeout.
+- Verified that pull request #6 passed CI for Python 3.11 and 3.12 before
+  merge.

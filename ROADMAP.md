@@ -8,7 +8,7 @@ synchronized with GitHub issues, planning notes, pull requests, and
 
 | Phase | Parent issue | Branch | Status |
 | --- | --- | --- | --- |
-| P0 Bootstrap scaffold | #1 | `feature/p0-bootstrap-scaffold` | Closeout |
+| P0 Bootstrap scaffold | #1 | `feature/p0-bootstrap-scaffold` | Complete |
 | P1 Workbook normalization foundation | TBD | `feature/p1-workbook-normalization` | Planned |
 
 ## Phase 0: Bootstrap Scaffold
@@ -17,7 +17,7 @@ Parent issue: #1
 
 Branch: `feature/p0-bootstrap-scaffold`
 
-Status: closeout
+Status: complete
 
 Goal: establish BC-NPPD as a public-safe, package-backed UBC-FRESH project with
 strict governance, planning, docs, CI, source policy checks, and traceable
@@ -59,7 +59,7 @@ Phase 0 local verification passed with:
 - `twine check dist/*`
 
 Branch push completed for `feature/p0-bootstrap-scaffold`. Pull request #6 is
-open against `main`.
+the Phase 0 closeout PR against `main`.
 
 ## Future Phase Candidates
 
