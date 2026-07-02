@@ -110,3 +110,6 @@ with `ROADMAP.md`, planning notes, issue comments, and pull requests.
 - Completed Phase 4 implementation local acceptance verification with Ruff,
   pytest, Sphinx, build, and twine checks passing.
 - Opened pull request #31 for Phase 4 closeout.
+- Verified that pull request #31 passed CI for Python 3.11 and 3.12 before
+  merge.
+- Merged pull request #31 to `main` as merge commit `6c2f679`.

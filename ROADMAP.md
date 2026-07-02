@@ -12,7 +12,7 @@ synchronized with GitHub issues, planning notes, pull requests, and
 | P1 Seed archive inventory and normalization contracts | #7 | `feature/p1-seed-inventory-normalization` | Complete |
 | P2 Evidence and source attribution model | #14 | `feature/p2-evidence-source-attribution` | Complete |
 | P3 Canonical data pipeline | #20 | `feature/p3-canonical-data-pipeline` | Complete |
-| P4 Scoring framework | #26 | `feature/p4-scoring-framework` | Active |
+| P4 Scoring framework | #26 | `feature/p4-scoring-framework` | Complete |
 | P5 v1.0.0a foundation record and release | TBD | `feature/p5-v1-foundation-release` | Planned |
 
 ## Phase 0: Bootstrap Scaffold
@@ -218,7 +218,7 @@ Parent issue: #26
 
 Branch: `feature/p4-scoring-framework`
 
-Status: active
+Status: complete
 
 Goal: document and implement evidence-aware UNI, PSI, and RVI score framework
 placeholders without inventing unsupported ecological values.
@@ -250,7 +250,7 @@ placeholders without inventing unsupported ecological values.
   - [x] Update roadmap and changelog with implementation state.
   - [x] Run full local acceptance.
   - [x] Open PR to `main` and record the PR number (#31).
-  - [ ] Comment verification on issues and close child issues only after
+  - [x] Comment verification on issues and close child issues only after
         checklist bodies are accurate.
 
 Phase 4 local verification passed with:
@@ -262,6 +262,10 @@ Phase 4 local verification passed with:
 - `twine check dist/*`
 
 Pull request #31 is the Phase 4 closeout PR against `main`.
+
+Pull request #31 passed CI for Python 3.11 and Python 3.12 before merge.
+
+Pull request #31 merged to `main` as merge commit `6c2f679`.
 
 ## Phase 5: v1.0.0a Foundation Record And Release
 
