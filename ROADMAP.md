@@ -642,7 +642,8 @@ calculating PSI scores.
   - [x] Add Sphinx and artifact README documentation.
   - [x] Add unit and CLI tests.
   - [x] Run local acceptance.
-  - [ ] Open and close through PR after green CI.
+  - [x] Open PR and record the PR number (#70).
+  - [ ] Merge PR after green CI.
 
 Phase 11 local verification passed with:
 
@@ -652,3 +653,5 @@ Phase 11 local verification passed with:
 - `python -m build`
 - `twine check dist/*`
 - `bc-nppd validate-vancouver-pollinator-module data/poc/vancouver/pollinator_module --json`
+
+Pull request #70 is the Phase 11 closeout PR against `main`.
