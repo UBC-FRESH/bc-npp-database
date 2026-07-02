@@ -298,3 +298,4 @@ with `ROADMAP.md`, planning notes, issue comments, and pull requests.
   `not_ready`.
 - Completed Phase 13 local acceptance verification with Ruff, pytest, Sphinx,
   build, twine, and all Vancouver PoC artifact validators passing.
+- Opened pull request #80 for Phase 13 closeout.

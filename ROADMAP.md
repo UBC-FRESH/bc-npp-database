@@ -736,7 +736,8 @@ and regenerating downstream artifacts.
 - [ ] P13.3 Validation, PR, and closeout (#79)
   - [x] Update tests and docs/counts.
   - [x] Run local acceptance.
-  - [ ] Open PR and merge after green CI.
+  - [x] Open PR and record the PR number (#80).
+  - [ ] Merge PR after green CI.
   - [ ] Close issues after merge.
 
 Phase 13 local verification passed with:
@@ -750,3 +751,5 @@ Phase 13 local verification passed with:
 - `bc-nppd validate-vancouver-evidence data/poc/vancouver/evidence_hardening --json`
 - `bc-nppd validate-vancouver-usability data/poc/vancouver/usability --json`
 - `bc-nppd validate-vancouver-pollinator-module data/poc/vancouver/pollinator_module --json`
+
+Pull request #80 is the Phase 13 closeout PR against `main`.
