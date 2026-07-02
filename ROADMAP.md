@@ -13,7 +13,7 @@ synchronized with GitHub issues, planning notes, pull requests, and
 | P2 Evidence and source attribution model | #14 | `feature/p2-evidence-source-attribution` | Complete |
 | P3 Canonical data pipeline | #20 | `feature/p3-canonical-data-pipeline` | Complete |
 | P4 Scoring framework | #26 | `feature/p4-scoring-framework` | Complete |
-| P5 v1.0.0a foundation record and release | #32 | `feature/p5-v1-foundation-release` | Active |
+| P5 v1.0.0a foundation record and release | #32 | `feature/p5-v1-foundation-release` | Complete |
 
 ## Phase 0: Bootstrap Scaffold
 
@@ -273,7 +273,7 @@ Parent issue: #32
 
 Branch: `feature/p5-v1-foundation-release`
 
-Status: active
+Status: complete
 
 Goal: produce a reviewed v1.0.0a foundation release with frozen schema
 direction, one gold-standard `Achillea millefolium` record, docs, verification,
@@ -306,9 +306,9 @@ and GitHub release artifacts.
   - [x] Update roadmap and changelog with implementation state.
   - [x] Run full local acceptance.
   - [x] Open PR to `main` and record the PR number (#37).
-  - [ ] Comment verification on issues and close child issues only after
+  - [x] Comment verification on issues and close child issues only after
         checklist bodies are accurate.
-  - [ ] Merge only after green CI and then close the parent issue.
+  - [x] Merge only after green CI and then close the parent issue.
 
 Phase 5 local verification passed with:
 
@@ -319,3 +319,7 @@ Phase 5 local verification passed with:
 - `twine check dist/*`
 
 Pull request #37 is the Phase 5 closeout PR against `main`.
+
+Pull request #37 passed CI for Python 3.11 and Python 3.12 before merge.
+
+Pull request #37 merged to `main` as merge commit `8c04ac9`.
