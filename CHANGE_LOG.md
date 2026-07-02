@@ -109,3 +109,4 @@ with `ROADMAP.md`, planning notes, issue comments, and pull requests.
   dependency.
 - Completed Phase 4 implementation local acceptance verification with Ruff,
   pytest, Sphinx, build, and twine checks passing.
+- Opened pull request #31 for Phase 4 closeout.

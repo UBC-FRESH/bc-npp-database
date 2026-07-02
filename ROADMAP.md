@@ -249,7 +249,7 @@ placeholders without inventing unsupported ecological values.
   - [x] Update Sphinx docs and planning notes.
   - [x] Update roadmap and changelog with implementation state.
   - [x] Run full local acceptance.
-  - [ ] Open PR to `main` and record the PR number.
+  - [x] Open PR to `main` and record the PR number (#31).
   - [ ] Comment verification on issues and close child issues only after
         checklist bodies are accurate.
 
@@ -260,6 +260,8 @@ Phase 4 local verification passed with:
 - `sphinx-build -b html docs _build/html -W`
 - `python -m build`
 - `twine check dist/*`
+
+Pull request #31 is the Phase 4 closeout PR against `main`.
 
 ## Phase 5: v1.0.0a Foundation Record And Release
 
