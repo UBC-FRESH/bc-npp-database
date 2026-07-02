@@ -21,7 +21,7 @@ synchronized with GitHub issues, planning notes, pull requests, and
 | P10 v0.1.0a1 GitHub alpha release | #61 | `feature/p10-v0.1.0a1-release` | Complete |
 | P11 Pollinator evidence-review module | #66 | `feature/p11-pollinator-module` | Complete |
 | P12 Expand Vancouver species list | #71 | `feature/p12-expand-vancouver-species-list` | Complete |
-| P13 Add Matricaria discoidea | #76 | `feature/p13-add-matricaria-discoidea` | Active |
+| P13 Add Matricaria discoidea | #76 | `feature/p13-add-matricaria-discoidea` | Complete |
 
 ## Phase 0: Bootstrap Scaffold
 
@@ -718,7 +718,7 @@ Parent issue: #76
 
 Branch: `feature/p13-add-matricaria-discoidea`
 
-Status: active
+Status: complete
 
 Goal: add `Matricaria discoidea` to the Vancouver PoC artifacts as an
 unreviewed user-requested expansion candidate, preserving evidence boundaries
@@ -733,12 +733,12 @@ and regenerating downstream artifacts.
   - [x] Regenerate P8 usability web app artifacts.
   - [x] Regenerate P11 pollinator module artifacts.
   - [x] Preserve `not_ready` score and PSI boundaries.
-- [ ] P13.3 Validation, PR, and closeout (#79)
+- [x] P13.3 Validation, PR, and closeout (#79)
   - [x] Update tests and docs/counts.
   - [x] Run local acceptance.
   - [x] Open PR and record the PR number (#80).
-  - [ ] Merge PR after green CI.
-  - [ ] Close issues after merge.
+  - [x] Merge PR after green CI.
+  - [x] Close issues after merge.
 
 Phase 13 local verification passed with:
 
@@ -753,3 +753,7 @@ Phase 13 local verification passed with:
 - `bc-nppd validate-vancouver-pollinator-module data/poc/vancouver/pollinator_module --json`
 
 Pull request #80 is the Phase 13 closeout PR against `main`.
+
+Pull request #80 passed CI for Python 3.11 and Python 3.12 before merge.
+
+Pull request #80 merged to `main` as merge commit `1971827`.
