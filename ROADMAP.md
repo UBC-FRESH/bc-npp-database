@@ -19,7 +19,7 @@ synchronized with GitHub issues, planning notes, pull requests, and
 | P8 Usability layer | #50 | `feature/p8-usability-layer` | Complete |
 | P9 Plant record detail interface | #56 | `feature/p9-plant-record-detail-interface` | Complete |
 | P10 v0.1.0a1 GitHub alpha release | #61 | `feature/p10-v0.1.0a1-release` | Complete |
-| P11 Pollinator evidence-review module | #66 | `feature/p11-pollinator-module` | Active |
+| P11 Pollinator evidence-review module | #66 | `feature/p11-pollinator-module` | Complete |
 
 ## Phase 0: Bootstrap Scaffold
 
@@ -620,7 +620,7 @@ Parent issue: #66
 
 Branch: `feature/p11-pollinator-module`
 
-Status: active
+Status: complete
 
 Goal: add a pollinator evidence-review module that materializes the Vancouver
 PoC pollinator review queue without inventing plant-pollinator claims or
@@ -638,12 +638,12 @@ calculating PSI scores.
   - [x] Add `bc-nppd generate-vancouver-pollinator-module`.
   - [x] Add `bc-nppd validate-vancouver-pollinator-module`.
   - [x] Track public-safe PoC pollinator module outputs.
-- [ ] P11.3 Docs, tests, acceptance, and closeout (#69)
+- [x] P11.3 Docs, tests, acceptance, and closeout (#69)
   - [x] Add Sphinx and artifact README documentation.
   - [x] Add unit and CLI tests.
   - [x] Run local acceptance.
   - [x] Open PR and record the PR number (#70).
-  - [ ] Merge PR after green CI.
+  - [x] Merge PR after green CI.
 
 Phase 11 local verification passed with:
 
@@ -655,3 +655,7 @@ Phase 11 local verification passed with:
 - `bc-nppd validate-vancouver-pollinator-module data/poc/vancouver/pollinator_module --json`
 
 Pull request #70 is the Phase 11 closeout PR against `main`.
+
+Pull request #70 passed CI for Python 3.11 and Python 3.12 before merge.
+
+Pull request #70 merged to `main` as merge commit `fd57abf`.
