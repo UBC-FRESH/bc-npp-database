@@ -204,3 +204,4 @@ with `ROADMAP.md`, planning notes, issue comments, and pull requests.
   marked insufficient data because height/spread fields are not reviewed yet.
 - Completed Phase 8 implementation local acceptance verification with Ruff,
   pytest, Sphinx, build, and twine checks passing.
+- Opened pull request #55 for Phase 8 closeout.

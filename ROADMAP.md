@@ -477,7 +477,7 @@ caveats.
 - [ ] P8.4 Verification, PR, and closeout (#54)
   - [x] Update roadmap and changelog with implementation state.
   - [x] Run full local acceptance.
-  - [ ] Open PR to `main` and record the PR number.
+  - [x] Open PR to `main` and record the PR number (#55).
   - [ ] Comment verification on issues and close child issues only after
         checklist bodies are accurate.
   - [ ] Merge only after green CI and then close the parent issue.
@@ -493,3 +493,5 @@ Phase 8 local verification passed with:
 The tracked usability artifact validates with:
 
 - `bc-nppd validate-vancouver-usability data/poc/vancouver/usability --json`
+
+Pull request #55 is the Phase 8 closeout PR against `main`.
