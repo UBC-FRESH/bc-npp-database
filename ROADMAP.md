@@ -578,7 +578,8 @@ representing the current Vancouver PoC product through Phase 9.
   - [x] Keep PyPI publishing out of scope.
 - [ ] P10.3 Release verification, tag, prerelease publication, and closeout (#64)
   - [x] Run full local acceptance and PoC artifact validators.
-  - [ ] Open and merge release-prep PR after green CI.
+  - [x] Open release-prep PR and record the PR number (#65).
+  - [ ] Merge release-prep PR after green CI.
   - [ ] Create and push annotated tag `v0.1.0a1` from clean `main`.
   - [ ] Confirm release workflow succeeds and prerelease has wheel/sdist
         attached.
@@ -594,3 +595,5 @@ Phase 10 release-prep local verification passed with:
 - `bc-nppd validate-vancouver-poc-list data/poc/vancouver --json`
 - `bc-nppd validate-vancouver-evidence data/poc/vancouver/evidence_hardening --json`
 - `bc-nppd validate-vancouver-usability data/poc/vancouver/usability --json`
+
+Pull request #65 is the Phase 10 release-prep PR against `main`.

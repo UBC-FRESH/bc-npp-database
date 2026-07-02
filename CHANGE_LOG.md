@@ -240,3 +240,4 @@ with `ROADMAP.md`, planning notes, issue comments, and pull requests.
   publish a GitHub prerelease with `dist/*` attached.
 - Completed Phase 10 release-prep local acceptance verification with Ruff,
   pytest, Sphinx, build, twine, and PoC artifact validators passing.
+- Opened pull request #65 for Phase 10 release prep.
