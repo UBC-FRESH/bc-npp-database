@@ -15,7 +15,7 @@ synchronized with GitHub issues, planning notes, pull requests, and
 | P4 Scoring framework | #26 | `feature/p4-scoring-framework` | Complete |
 | P5 v1.0.0a foundation record and release | #32 | `feature/p5-v1-foundation-release` | Complete |
 | P6 Vancouver plant list PoC MVP | #38 | `feature/p6-vancouver-poc-list` | Complete |
-| P7 Evidence hardening | #44 | `feature/p7-evidence-hardening` | Active |
+| P7 Evidence hardening | #44 | `feature/p7-evidence-hardening` | Complete |
 | P8 Usability layer | TBD | `feature/p8-usability-layer` | Planned |
 
 ## Phase 0: Bootstrap Scaffold
@@ -390,7 +390,7 @@ Parent issue: #44
 
 Branch: `feature/p7-evidence-hardening`
 
-Status: active
+Status: complete
 
 Goal: review and improve evidence for the 20-species Vancouver PoC list,
 promoting candidate fields to reviewed fields only where source attribution is
@@ -420,9 +420,9 @@ adequate.
   - [x] Update roadmap and changelog with implementation state.
   - [x] Run full local acceptance.
   - [x] Open PR to `main` and record the PR number (#49).
-  - [ ] Comment verification on issues and close child issues only after
+  - [x] Comment verification on issues and close child issues only after
         checklist bodies are accurate.
-  - [ ] Merge only after green CI and then close the parent issue.
+  - [x] Merge only after green CI and then close the parent issue.
 
 Phase 7 local verification passed with:
 
@@ -437,6 +437,10 @@ The tracked evidence-hardening artifact validates with:
 - `bc-nppd validate-vancouver-evidence data/poc/vancouver/evidence_hardening --json`
 
 Pull request #49 is the Phase 7 closeout PR against `main`.
+
+Pull request #49 passed CI for Python 3.11 and Python 3.12 before merge.
+
+Pull request #49 merged to `main` as merge commit `5c1bfeb`.
 
 ## Phase 8: Usability Layer
 
