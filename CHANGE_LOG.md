@@ -241,3 +241,6 @@ with `ROADMAP.md`, planning notes, issue comments, and pull requests.
 - Completed Phase 10 release-prep local acceptance verification with Ruff,
   pytest, Sphinx, build, twine, and PoC artifact validators passing.
 - Opened pull request #65 for Phase 10 release prep.
+- Verified that pull request #65 passed CI for Python 3.11 and Python 3.12
+  before merge.
+- Merged pull request #65 to `main` as merge commit `40ed110`.
