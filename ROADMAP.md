@@ -16,7 +16,7 @@ synchronized with GitHub issues, planning notes, pull requests, and
 | P5 v1.0.0a foundation record and release | #32 | `feature/p5-v1-foundation-release` | Complete |
 | P6 Vancouver plant list PoC MVP | #38 | `feature/p6-vancouver-poc-list` | Complete |
 | P7 Evidence hardening | #44 | `feature/p7-evidence-hardening` | Complete |
-| P8 Usability layer | #50 | `feature/p8-usability-layer` | Active |
+| P8 Usability layer | #50 | `feature/p8-usability-layer` | Complete |
 
 ## Phase 0: Bootstrap Scaffold
 
@@ -448,7 +448,7 @@ Parent issue: #50
 
 Branch: `feature/p8-usability-layer`
 
-Status: active
+Status: complete
 
 Goal: add a human-friendly inspection layer for the Vancouver PoC list, with
 sortable/filterable views and use-case groupings while preserving evidence
@@ -474,13 +474,13 @@ caveats.
   - [x] Track public-safe usability artifacts under `data/poc/vancouver/usability`.
   - [x] Add Sphinx docs and artifact README for inspection.
   - [x] Keep generated build folders, raw sources, and private data ignored.
-- [ ] P8.4 Verification, PR, and closeout (#54)
+- [x] P8.4 Verification, PR, and closeout (#54)
   - [x] Update roadmap and changelog with implementation state.
   - [x] Run full local acceptance.
   - [x] Open PR to `main` and record the PR number (#55).
-  - [ ] Comment verification on issues and close child issues only after
+  - [x] Comment verification on issues and close child issues only after
         checklist bodies are accurate.
-  - [ ] Merge only after green CI and then close the parent issue.
+  - [x] Merge only after green CI and then close the parent issue.
 
 Phase 8 local verification passed with:
 
@@ -495,3 +495,7 @@ The tracked usability artifact validates with:
 - `bc-nppd validate-vancouver-usability data/poc/vancouver/usability --json`
 
 Pull request #55 is the Phase 8 closeout PR against `main`.
+
+Pull request #55 passed CI for Python 3.11 and Python 3.12 before merge.
+
+Pull request #55 merged to `main` as merge commit `f47c612`.
