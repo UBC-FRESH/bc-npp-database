@@ -942,7 +942,7 @@ mowability, and source-attribution boundaries.
 - [ ] P17.4 Regeneration, validation, and closeout (#101)
   - [x] Regenerate downstream artifacts when approvals are applied.
   - [x] Run local acceptance.
-  - [ ] Open PR and record the PR number.
+  - [x] Open PR and record the PR number (#102).
   - [ ] Merge PR after green CI.
   - [ ] Close issues after merge.
 
@@ -967,6 +967,8 @@ Phase 17 local verification passed with:
 - `python -m build`
 - `twine check dist/*`
 - Existing tracked Vancouver PoC, evidence, usability, and pollinator validators.
+
+Pull request #102 is the Phase 17 closeout PR against `main`.
 
 ## Phase 18: Provider Data Usability Layer
 

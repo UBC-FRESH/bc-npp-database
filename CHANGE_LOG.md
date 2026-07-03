@@ -380,3 +380,4 @@ with `ROADMAP.md`, planning notes, issue comments, and pull requests.
 - Completed Phase 17 local acceptance verification with Ruff, pytest, provider
   approval CLI checks, regenerated ignored provider-approved Vancouver outputs,
   Sphinx, build, twine, and tracked Vancouver validators passing.
+- Opened pull request #102 for Phase 17 closeout.
