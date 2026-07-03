@@ -630,3 +630,4 @@ with `ROADMAP.md`, planning notes, issue comments, and pull requests.
   provider rows, 395 supplier rows, and 1 provisional mowability row.
 - Completed P28 local acceptance with Ruff, 122 pytest tests, Sphinx docs,
   package build, and twine metadata check passing.
+- Opened pull request #136 for Phase 28 closeout.

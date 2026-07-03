@@ -36,7 +36,7 @@ synchronized with GitHub issues, planning notes, pull requests, and
 | P25 Cumulative provider approval previews | #129 | `feature/p25-cumulative-provider-approvals` | Complete |
 | P26 Provider approval ID namespacing | #131 | `feature/p26-provider-approval-id-namespacing` | Complete |
 | P27 Usability provider filter layout fix | #133 | `feature/p27-usability-filter-layout` | Complete |
-| P28 Provider approval dedupe guardrails | #135 | `feature/p28-provider-approval-dedupe` | PR pending |
+| P28 Provider approval dedupe guardrails | #135 | `feature/p28-provider-approval-dedupe` | PR #136 |
 
 ## Phase 0: Bootstrap Scaffold
 
@@ -1510,7 +1510,7 @@ apply layer preserved it instead of collapsing the duplicate observation.
 - [x] Validate provider data, plant list, evidence hardening, usability, and
       pollinator module outputs.
 - [x] Run full acceptance.
-- [ ] Open PR.
+- [x] Open PR (#136).
 - [ ] Merge after green CI and close issue.
 
 P28 cumulative preview command:
