@@ -37,7 +37,7 @@ synchronized with GitHub issues, planning notes, pull requests, and
 | P26 Provider approval ID namespacing | #131 | `feature/p26-provider-approval-id-namespacing` | Complete |
 | P27 Usability provider filter layout fix | #133 | `feature/p27-usability-filter-layout` | Complete |
 | P28 Provider approval dedupe guardrails | #135 | `feature/p28-provider-approval-dedupe` | Complete |
-| P29 Provider source sweep workflow overlays | #137 | `feature/p29-provider-workflow-overlays` | PR #141 |
+| P29 Provider source sweep workflow overlays | #137 | `feature/p29-provider-workflow-overlays` | Complete |
 | P30 Premier Pacific source sweep | TBD | `feature/p30-premier-source-sweep` | Planned |
 | P31 One-command reviewed provider preview | TBD | `feature/p31-provider-preview-runner` | Planned |
 
@@ -1549,7 +1549,7 @@ Parent issue: #137
 
 Branch: `feature/p29-provider-workflow-overlays`
 
-Status: active
+Status: complete
 
 Goal: make provider source sweeps repeatable through FreshForge YAML workflow
 definitions and provider-specific YAML overlays, so future supplier targets can
@@ -1581,7 +1581,10 @@ bespoke package command sequencers.
         lower-level `bc-nppd` fallback.
   - [x] Run full local acceptance.
   - [x] Open PR (#141) after P29 tasks are complete.
-  - [ ] Merge after green CI and close issue.
+  - [x] Merge after green CI and close issue.
+
+Pull request #141 passed CI for Python 3.11 and Python 3.12 and merged to
+`main` as merge commit `c54922b`.
 
 P29 implemented interfaces:
 
