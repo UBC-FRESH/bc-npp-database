@@ -33,6 +33,7 @@ synchronized with GitHub issues, planning notes, pull requests, and
 | P22 Windows runner execution-policy shim | #123 | `feature/p22-windows-runner-shim` | Complete |
 | P23 Northwest Meadowscapes source sweep | #125 | `feature/p23-nwm-source-sweep` | Complete |
 | P24 West Coast Seeds source sweep | #127 | `feature/p24-west-coast-seeds-source-sweep` | Complete |
+| P25 Cumulative provider approval previews | #129 | `feature/p25-cumulative-provider-approvals` | PR pending |
 
 ## Phase 0: Bootstrap Scaffold
 
@@ -1321,3 +1322,55 @@ P24 current catch counts:
 - 1 existing Vancouver PoC match.
 - 54 new candidate species.
 - 487 draft approval rows.
+
+## Phase 25: Cumulative Provider Approval Previews
+
+Parent issue: #129
+
+Branch: `feature/p25-cumulative-provider-approvals`
+
+Status: PR pending
+
+Goal: fix provider approval previews so successive approved manifests can be
+applied cumulatively, and prevent downloaded manifests from being copied into
+the wrong provider scratch path.
+
+Problem diagnosed: the P21 runner applied a single downloaded manifest to the
+tracked `data/poc/vancouver` base every time. Earlier provider approval imports
+that existed only in ignored `outputs/provider_approved_vancouver` were
+therefore overwritten by the next provider preview. The runner also defaulted
+`ProviderId` to `PROV-SATIN`, so a WCS approval manifest could be copied to the
+Satinflower scratch path.
+
+- [x] Infer provider ID from approval manifests before selecting scratch paths.
+- [x] Add `bc-nppd apply-provider-approval-sequence` for cumulative preview
+      builds from multiple approved manifests.
+- [x] Preserve existing preview `provider_data` when applying a later manifest
+      to a previous preview base.
+- [x] Update the PowerShell runner to use the sequence command and provider
+      inference.
+- [x] Update docs and FreshForge workflow shape with cumulative-preview rules.
+- [x] Add regression tests for provider-data carry-forward and cumulative
+      sequence application.
+- [x] Run full acceptance.
+- [ ] Open PR.
+- [ ] Merge after green CI and close issue.
+
+P25 local acceptance passed:
+
+- `python -m ruff check .`
+- `python -m pytest` (`120 passed`)
+- `sphinx-build -b html docs _build/html -W`
+- `python -m build`
+- `twine check dist/*`
+
+P25 smoke test:
+
+- `scripts/apply-downloaded-provider-approval.cmd -ManifestPath C:\Users\now25\Downloads\approval_manifest.csv -SkipRegeneration`
+- The runner inferred `PROV-WCS`, copied the manifest to
+  `outputs/provider_approval_review/PROV-WCS/approval_manifest.csv`, and
+  applied the one available WCS manifest into the ignored preview.
+
+Important product rule: a preview is cumulative only when all reviewed
+manifests are supplied to the sequence command, or when previous approvals have
+already been promoted into the tracked `data/poc/vancouver` base.

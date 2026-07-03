@@ -1,7 +1,10 @@
 import csv
+import shutil
 from pathlib import Path
 
 from bc_npp_database.provider_approvals import (
+    APPROVAL_FIELDS,
+    apply_provider_approval_sequence,
     apply_provider_approvals,
     validate_provider_approvals,
 )
@@ -18,9 +21,10 @@ def test_provider_approval_manifest_validates_cleanly():
 
 
 def test_apply_provider_approvals_imports_only_approved_rows(tmp_path):
+    poc_dir = _clean_poc_dir(tmp_path)
     result = apply_provider_approvals(
         APPROVALS,
-        POC_DIR,
+        poc_dir,
         tmp_path / "vancouver",
         regenerate_downstream=False,
     )
@@ -45,9 +49,10 @@ def test_apply_provider_approvals_imports_only_approved_rows(tmp_path):
 
 
 def test_apply_provider_approvals_adds_source_attribution(tmp_path):
+    poc_dir = _clean_poc_dir(tmp_path)
     result = apply_provider_approvals(
         APPROVALS,
-        POC_DIR,
+        poc_dir,
         tmp_path / "vancouver",
         regenerate_downstream=False,
     )
@@ -63,6 +68,59 @@ def test_apply_provider_approvals_adds_source_attribution(tmp_path):
         "mowability_score",
         "provider_candidate",
     }
+
+
+def test_apply_provider_approvals_carries_forward_existing_provider_data(tmp_path):
+    poc_dir = _clean_poc_dir(tmp_path)
+    rows = _read_csv(APPROVALS)
+    satin_path = tmp_path / "satin.csv"
+    premier_path = tmp_path / "premier.csv"
+    _write_csv(satin_path, [row for row in rows if row["provider_id"] == "PROV-SATIN"])
+    _write_csv(premier_path, [row for row in rows if row["provider_id"] == "PROV-PREMIER"])
+
+    first = apply_provider_approvals(
+        satin_path,
+        poc_dir,
+        tmp_path / "step1",
+        regenerate_downstream=False,
+    )
+    second = apply_provider_approvals(
+        premier_path,
+        tmp_path / "step1",
+        tmp_path / "step2",
+        regenerate_downstream=False,
+    )
+
+    assert first.counts["approval_manifest"] == 3
+    assert second.counts["approval_manifest"] == 4
+    suppliers = _read_csv(tmp_path / "step2" / "provider_data" / "supplier_availability.csv")
+    mowability = _read_csv(tmp_path / "step2" / "provider_data" / "mowability.csv")
+    assert len(suppliers) == 1
+    assert len(mowability) == 1
+    plants = _read_csv(tmp_path / "step2" / "plant_list.csv")
+    assert any(row["Botanical Name"] == "Festuca rubra" for row in plants)
+
+
+def test_apply_provider_approval_sequence_cumulates_manifests(tmp_path):
+    poc_dir = _clean_poc_dir(tmp_path)
+    rows = _read_csv(APPROVALS)
+    satin_path = tmp_path / "satin.csv"
+    premier_path = tmp_path / "premier.csv"
+    _write_csv(satin_path, [row for row in rows if row["provider_id"] == "PROV-SATIN"])
+    _write_csv(premier_path, [row for row in rows if row["provider_id"] == "PROV-PREMIER"])
+
+    result = apply_provider_approval_sequence(
+        [satin_path, premier_path],
+        poc_dir,
+        tmp_path / "sequence",
+        regenerate_downstream=False,
+    )
+
+    assert result.counts["approval_manifest"] == 4
+    assert result.counts["supplier_availability"] == 1
+    assert result.counts["mowability"] == 1
+    plants = _read_csv(tmp_path / "sequence" / "plant_list.csv")
+    assert any(row["Botanical Name"] == "Festuca rubra" for row in plants)
 
 
 def test_provider_approval_validation_rejects_bad_status_and_mowability(tmp_path):
@@ -87,3 +145,19 @@ def test_provider_approval_validation_rejects_bad_status_and_mowability(tmp_path
 def _read_csv(path: Path) -> list[dict[str, str]]:
     with path.open(newline="", encoding="utf-8") as handle:
         return [dict(row) for row in csv.DictReader(handle)]
+
+
+def _write_csv(path: Path, rows: list[dict[str, str]]) -> None:
+    with path.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=APPROVAL_FIELDS)
+        writer.writeheader()
+        writer.writerows(rows)
+
+
+def _clean_poc_dir(tmp_path: Path) -> Path:
+    destination = tmp_path / "clean_poc"
+    shutil.copytree(POC_DIR, destination)
+    provider_data = destination / "provider_data"
+    if provider_data.exists():
+        shutil.rmtree(provider_data)
+    return destination

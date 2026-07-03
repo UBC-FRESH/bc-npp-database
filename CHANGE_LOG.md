@@ -546,3 +546,26 @@ with `ROADMAP.md`, planning notes, issue comments, and pull requests.
 - Verified pull request #128 passed CI for Python 3.11 and Python 3.12.
 - Merged pull request #128 to `main` as merge commit `69e39fa`.
 - Closed Phase 24 as complete.
+- Started Phase 25 cumulative provider approval previews on
+  `feature/p25-cumulative-provider-approvals`.
+- Created Phase 25 GitHub issue record: parent issue #129.
+- Diagnosed that ignored approval previews were not cumulative: each downloaded
+  manifest run started from the tracked `data/poc/vancouver` base, so the next
+  provider preview overwrote prior provider-only preview imports.
+- Diagnosed that the P21 runner defaulted to `PROV-SATIN`, allowing a WCS
+  downloaded manifest to be copied into the Satinflower scratch path.
+- Added cumulative provider approval application with
+  `bc-nppd apply-provider-approval-sequence`.
+- Updated provider approval application to preserve existing preview
+  `provider_data` when a prior preview is used as the next base.
+- Updated the Windows runner to infer provider IDs from approval manifests,
+  copy each manifest to its matching `outputs/provider_approval_review/PROV-*`
+  scratch path, and call the cumulative sequence command.
+- Updated docs and the FreshForge workflow shape to state that previews are
+  cumulative only when all approved manifests are supplied or prior approvals
+  have been promoted into the tracked PoC base.
+- Smoke-tested the runner against the current downloaded WCS manifest; it
+  inferred `PROV-WCS` and no longer wrote WCS data into the Satinflower scratch
+  path.
+- Completed P25 local acceptance with Ruff, 120 pytest tests, Sphinx docs,
+  package build, and twine metadata check passing.

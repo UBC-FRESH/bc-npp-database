@@ -84,18 +84,33 @@ review app into the default Downloads folder, then run:
    .\scripts\apply-downloaded-provider-approval.cmd -OpenPreview
 
 The command wrapper works on Windows systems that block direct PowerShell script
-execution. It validates the downloaded manifest, copies it to an ignored
-scratch path, applies approved rows into ``outputs/provider_approved_vancouver``,
-regenerates downstream preview artifacts, validates the preview, and opens the
-static preview app when ``-OpenPreview`` is included. It also prints the preview
-path:
+execution. It validates the downloaded manifest, infers the provider ID from
+the CSV, copies it to the matching ignored scratch path, applies approved rows
+into ``outputs/provider_approved_vancouver``, regenerates downstream preview
+artifacts, validates the preview, and opens the static preview app when
+``-OpenPreview`` is included. It also prints the preview path:
 
 .. code-block:: text
 
    outputs/provider_approved_vancouver/usability/index.html
 
-Use ``-ManifestPath`` when the CSV was saved somewhere else. The direct
-PowerShell fallback is:
+Use ``-ManifestPath`` when one CSV was saved somewhere else. Use
+``-ManifestPaths`` to rebuild a cumulative preview from multiple reviewed
+provider manifests:
+
+.. code-block:: console
+
+   .\scripts\apply-downloaded-provider-approval.cmd `
+     -ManifestPaths outputs/provider_approval_review/PROV-SATIN/approval_manifest.csv,outputs/provider_approval_review/PROV-NWM/approval_manifest.csv,outputs/provider_approval_review/PROV-WCS/approval_manifest.csv `
+     -OpenPreview
+
+The preview is cumulative only when all approved manifests are supplied, or
+when prior provider approvals have already been promoted into the tracked
+``data/poc/vancouver`` base. A single-manifest preview starts from the tracked
+PoC base and will not include earlier provider runs that only existed in ignored
+``outputs/``.
+
+The direct PowerShell fallback is:
 
 .. code-block:: console
 
@@ -122,7 +137,19 @@ Dry-run an approved manifest into ignored outputs:
 
 .. code-block:: console
 
-   bc-nppd apply-provider-approvals path/to/approval_manifest.csv \
+   bc-nppd apply-provider-approval-sequence path/to/approval_manifest.csv \
+     --poc-dir data/poc/vancouver \
+     --out-dir outputs/provider_approved_vancouver \
+     --json
+
+Dry-run multiple approved manifests cumulatively:
+
+.. code-block:: console
+
+   bc-nppd apply-provider-approval-sequence \
+     path/to/satinflower_approval_manifest.csv \
+     path/to/nwm_approval_manifest.csv \
+     path/to/wcs_approval_manifest.csv \
      --poc-dir data/poc/vancouver \
      --out-dir outputs/provider_approved_vancouver \
      --json

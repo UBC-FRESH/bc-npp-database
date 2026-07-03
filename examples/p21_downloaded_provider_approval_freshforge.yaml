@@ -11,16 +11,17 @@ workflow:
     artifacts, and validate the preview.
 
 parameters:
-  provider_id: PROV-SATIN
   database_instance: vancouver
-  downloaded_manifest: ${USERPROFILE}/Downloads/approval_manifest.csv
-  scratch_manifest: outputs/provider_approval_review/PROV-SATIN/approval_manifest.csv
+  downloaded_manifests:
+    - ${USERPROFILE}/Downloads/approval_manifest.csv
+  scratch_manifests:
+    - outputs/provider_approval_review/PROVIDER_FROM_MANIFEST/approval_manifest.csv
   poc_dir: data/poc/vancouver
   preview_dir: outputs/provider_approved_vancouver
   run_summary: outputs/provider_approved_vancouver/provider_approval_preview_summary.txt
 
 nodes:
-  - id: provider.copy_downloaded_manifest
+  - id: provider.copy_downloaded_manifests
     command:
       - powershell
       - -NoProfile
@@ -28,20 +29,21 @@ nodes:
       - Bypass
       - -Command
       - >
-        New-Item -ItemType Directory -Force -Path (Split-Path '${scratch_manifest}');
-        Copy-Item -LiteralPath '${downloaded_manifest}' -Destination '${scratch_manifest}' -Force
+        # Resolve provider_id from each approval manifest and copy it to
+        # outputs/provider_approval_review/PROV-*/approval_manifest.csv before
+        # running the cumulative approval sequence.
     inputs:
-      - "${downloaded_manifest}"
+      - "${downloaded_manifests}"
     outputs:
-      - "${scratch_manifest}"
+      - "${scratch_manifests}"
 
   - id: provider.validate_approval_manifest
     needs:
-      - provider.copy_downloaded_manifest
+      - provider.copy_downloaded_manifests
     command:
       - bc-nppd
       - validate-provider-approvals
-      - "${scratch_manifest}"
+      - "${scratch_manifests}"
       - --json
 
   - id: provider.apply_approval_preview
@@ -49,8 +51,8 @@ nodes:
       - provider.validate_approval_manifest
     command:
       - bc-nppd
-      - apply-provider-approvals
-      - "${scratch_manifest}"
+      - apply-provider-approval-sequence
+      - "${scratch_manifests}"
       - --poc-dir
       - "${poc_dir}"
       - --out-dir
@@ -121,8 +123,8 @@ nodes:
       - Bypass
       - -Command
       - >
-        "Provider approval preview complete.`nProvider: ${provider_id}`nPreview:
-        ${preview_dir}`nOpen: ${preview_dir}/usability/index.html" |
+        "Provider approval preview complete.`nPreview: ${preview_dir}`nOpen:
+        ${preview_dir}/usability/index.html" |
         Set-Content -Path '${run_summary}' -Encoding utf8
     outputs:
       - "${run_summary}"

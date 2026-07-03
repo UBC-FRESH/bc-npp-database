@@ -41,6 +41,7 @@ from .provider_approval_review import (
     has_error_diagnostics as has_provider_approval_review_error_diagnostics,
 )
 from .provider_approvals import (
+    apply_provider_approval_sequence,
     apply_provider_approvals,
     validate_provider_approvals,
 )
@@ -334,6 +335,38 @@ def apply_provider_approvals_command(
         typer.echo(json.dumps(result.to_summary_dict(), indent=2))
     else:
         typer.echo(f"Applied provider approvals to {out_dir}.")
+        for name, path in result.paths.items():
+            typer.echo(f"- {name}: {path}")
+    if has_provider_approval_error_diagnostics(result.diagnostics):
+        raise typer.Exit(code=1)
+
+
+@app.command("apply-provider-approval-sequence")
+def apply_provider_approval_sequence_command(
+    approvals_paths: list[Path] = typer.Argument(
+        ...,
+        help="Approval manifests to apply cumulatively in order.",
+    ),
+    poc_dir: Path = typer.Option(..., "--poc-dir", help="Input Vancouver PoC directory."),
+    out_dir: Path = typer.Option(..., "--out-dir", help="Output Vancouver PoC directory."),
+    skip_regeneration: bool = typer.Option(
+        False,
+        "--skip-regeneration",
+        help="Do not regenerate evidence, usability, or pollinator artifacts.",
+    ),
+    json_output: bool = typer.Option(False, "--json", help="Emit JSON output."),
+) -> None:
+    """Apply multiple provider approval manifests cumulatively to the Vancouver PoC."""
+    result = apply_provider_approval_sequence(
+        approvals_paths,
+        poc_dir,
+        out_dir,
+        regenerate_downstream=not skip_regeneration,
+    )
+    if json_output:
+        typer.echo(json.dumps(result.to_summary_dict(), indent=2))
+    else:
+        typer.echo(f"Applied provider approval sequence to {out_dir}.")
         for name, path in result.paths.items():
             typer.echo(f"- {name}: {path}")
     if has_provider_approval_error_diagnostics(result.diagnostics):
