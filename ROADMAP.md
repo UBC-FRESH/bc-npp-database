@@ -77,141 +77,6 @@ Phase 0 local verification passed with:
 - `python -m build`
 - `twine check dist/*`
 
-## Phase 19: Provider Source Sweep Workflow
-
-Parent issue: #109
-
-Branch: `feature/p19-provider-source-sweep`
-
-Status: complete
-
-Goal: run targeted provider catalogue sweeps into ignored sandbox/review
-outputs so the team can inspect the full candidate catch before approving any
-provider-derived data.
-
-- [x] P19.1 Targeted provider catalogue sweep CLI (#110)
-  - [x] Add `--source-sweep` mode to provider sandbox generation.
-  - [x] Add `--catalog-url` for provider-specific catalogue or collection entrypoints.
-  - [x] Preserve raw fetched catalogue JSON only under ignored `local/provider_raw`.
-- [x] P19.2 Satinflower seed review sandbox run (#111)
-  - [x] Run Satinflower from `https://satinflower.ca/collections/seed`.
-  - [x] Generate ignored sandbox outputs under `outputs/provider_sandbox_source_sweep/PROV-SATIN`.
-  - [x] Generate ignored review outputs under `outputs/provider_review_source_sweep/PROV-SATIN`.
-  - [x] Record catch counts: 115 candidate species, 345 attribute rows, 115 supplier rows, 0 mowability rows.
-- [x] P19.3 FreshForge template, docs, validation, and closeout (#112)
-  - [x] Add a dependency-free FreshForge workflow shape for provider source sweeps.
-  - [x] Document the Satinflower seed sweep workflow in user-facing docs.
-  - [x] Run focused Ruff, provider tests, and Sphinx docs verification.
-  - [x] Open PR and record the PR number (#114).
-  - [x] Merge after green CI and close issues.
-- [x] P19.4 Expert provider review and approval interface (#113)
-  - [x] Add a static approval-review app builder and CLI command.
-  - [x] Generate `review_items.csv` and a valid `approval_manifest_draft.csv`.
-  - [x] Add species-first filters, detail panel, decisions, and CSV download/copy.
-  - [x] Document the review/export/validate/apply workflow.
-
-P19 issue records were created as parent issue #109 and child issues #110
-through #113.
-
-Pull request #114 is the Phase 19 closeout PR against `main`.
-It passed CI for Python 3.11 and Python 3.12 and merged to `main` as merge
-commit `949c5e5`.
-
-Phase 19 focused verification passed with:
-
-- `python -m ruff check .`
-- `python -m pytest` (110 passed)
-- `sphinx-build -b html docs _build/html -W`
-- `python -m build`
-- `twine check dist/*`
-- `bc-nppd build-provider-approval-review outputs/provider_sandbox_source_sweep/PROV-SATIN --poc-dir data/poc/vancouver --out-dir outputs/provider_approval_review/PROV-SATIN --reviewer "expert reviewer" --json`
-- `bc-nppd validate-provider-approvals outputs/provider_approval_review/PROV-SATIN/approval_manifest_draft.csv --json`
-
-P19.4 adds a static expert approval review app generated with:
-
-```bash
-bc-nppd build-provider-approval-review outputs/provider_sandbox_source_sweep/PROV-SATIN \
-  --poc-dir data/poc/vancouver \
-  --out-dir outputs/provider_approval_review/PROV-SATIN \
-  --reviewer "expert reviewer" \
-  --json
-```
-
-The live Satinflower seed sweep was run with:
-
-```bash
-bc-nppd scrape-provider-sandbox PROV-SATIN \
-  --database-instance vancouver \
-  --live-fetch \
-  --source-sweep \
-  --catalog-url https://satinflower.ca/collections/seed \
-  --max-pages 5 \
-  --raw-dir local/provider_raw \
-  --out-dir outputs/provider_sandbox_source_sweep/PROV-SATIN \
-  --json
-bc-nppd validate-provider-sandbox outputs/provider_sandbox_source_sweep/PROV-SATIN --json
-bc-nppd build-provider-review outputs/provider_sandbox_source_sweep/PROV-SATIN \
-  --out-dir outputs/provider_review_source_sweep/PROV-SATIN \
-  --json
-```
-
-## Phase 20: Satinflower Product Detail Extraction
-
-Parent issue: #115
-
-Branch: `feature/p20-satinflower-product-details`
-
-Status: complete
-
-Goal: extract Satinflower product-page `Plant Details` and `Seed Details`
-content into provider sandbox attributes so expert reviewers see the full
-product evidence, not only title/type/tag metadata.
-
-- [x] P20.1 Product body details into review attributes (#116)
-  - [x] Parse Shopify `body_html` description text.
-  - [x] Parse `Plant Details` table rows into candidate attributes.
-  - [x] Parse `Seed Details` table rows into candidate attributes.
-  - [x] Regenerate ignored Satinflower sandbox and approval-review outputs.
-  - [x] Run full acceptance and open PR (#117).
-  - [x] Merge after green CI and close issues.
-
-P20 issue records were created as parent issue #115 and child issue #116.
-
-Pull request #117 is the Phase 20 closeout PR against `main`.
-It passed CI for Python 3.11 and Python 3.12 and merged to `main` as merge
-commit `f334a08`.
-
-The regenerated Satinflower seed sweep now produces 115 candidate species,
-2,086 candidate attribute rows, 115 supplier rows, and 0 mowability rows. The
-approval-review draft contains 2,316 rows and validates cleanly.
-
-Phase 20 local verification passed with:
-
-- `python -m ruff check .`
-- `python -m pytest` (110 passed)
-- `sphinx-build -b html docs _build/html -W`
-- `python -m build`
-- `twine check dist/*`
-- `bc-nppd scrape-provider-sandbox PROV-SATIN --database-instance vancouver --live-fetch --source-sweep --catalog-url https://satinflower.ca/collections/seed --max-pages 5 --raw-dir local/provider_raw --out-dir outputs/provider_sandbox_source_sweep/PROV-SATIN --json`
-- `bc-nppd validate-provider-sandbox outputs/provider_sandbox_source_sweep/PROV-SATIN --json`
-- `bc-nppd build-provider-approval-review outputs/provider_sandbox_source_sweep/PROV-SATIN --poc-dir data/poc/vancouver --out-dir outputs/provider_approval_review/PROV-SATIN --reviewer "expert reviewer" --json`
-- `bc-nppd validate-provider-approvals outputs/provider_approval_review/PROV-SATIN/approval_manifest_draft.csv --json`
-
-Branch push completed for `feature/p0-bootstrap-scaffold`. Pull request #6 is
-the Phase 0 closeout PR against `main`.
-
-## Future Phase Candidates
-
-Future phases should be activated only after Phase 0 closeout unless the
-maintainer explicitly approves a parallel lane.
-
-Potential post-foundation phase:
-
-- P6 External ecosystem and media adapters: optional FreshForge, FEMIC BCDC,
-  fresh-hectaresbc, and figrecover integrations for source resolution, AOI
-  materialization, raster context search, media-derived evidence recovery, and
-  reviewed diagnostics.
-
 ## Phase 1: Seed Archive Inventory And Normalization Contracts
 
 Parent issue: #7
@@ -1146,3 +1011,124 @@ Phase 18 local verification passed with:
 - `sphinx-build -b html docs _build/html -W`
 - `python -m build`
 - `twine check dist/*`
+
+## Phase 19: Provider Source Sweep Workflow
+
+Parent issue: #109
+
+Branch: `feature/p19-provider-source-sweep`
+
+Status: complete
+
+Goal: run targeted provider catalogue sweeps into ignored sandbox/review
+outputs so the team can inspect the full candidate catch before approving any
+provider-derived data.
+
+- [x] P19.1 Targeted provider catalogue sweep CLI (#110)
+  - [x] Add `--source-sweep` mode to provider sandbox generation.
+  - [x] Add `--catalog-url` for provider-specific catalogue or collection entrypoints.
+  - [x] Preserve raw fetched catalogue JSON only under ignored `local/provider_raw`.
+- [x] P19.2 Satinflower seed review sandbox run (#111)
+  - [x] Run Satinflower from `https://satinflower.ca/collections/seed`.
+  - [x] Generate ignored sandbox outputs under `outputs/provider_sandbox_source_sweep/PROV-SATIN`.
+  - [x] Generate ignored review outputs under `outputs/provider_review_source_sweep/PROV-SATIN`.
+  - [x] Record catch counts: 115 candidate species, 345 attribute rows, 115 supplier rows, 0 mowability rows.
+- [x] P19.3 FreshForge template, docs, validation, and closeout (#112)
+  - [x] Add a dependency-free FreshForge workflow shape for provider source sweeps.
+  - [x] Document the Satinflower seed sweep workflow in user-facing docs.
+  - [x] Run focused Ruff, provider tests, and Sphinx docs verification.
+  - [x] Open PR and record the PR number (#114).
+  - [x] Merge after green CI and close issues.
+- [x] P19.4 Expert provider review and approval interface (#113)
+  - [x] Add a static approval-review app builder and CLI command.
+  - [x] Generate `review_items.csv` and a valid `approval_manifest_draft.csv`.
+  - [x] Add species-first filters, detail panel, decisions, and CSV download/copy.
+  - [x] Document the review/export/validate/apply workflow.
+
+P19 issue records were created as parent issue #109 and child issues #110
+through #113.
+
+Pull request #114 is the Phase 19 closeout PR against `main`.
+It passed CI for Python 3.11 and Python 3.12 and merged to `main` as merge
+commit `949c5e5`.
+
+Phase 19 focused verification passed with:
+
+- `python -m ruff check .`
+- `python -m pytest` (110 passed)
+- `sphinx-build -b html docs _build/html -W`
+- `python -m build`
+- `twine check dist/*`
+- `bc-nppd build-provider-approval-review outputs/provider_sandbox_source_sweep/PROV-SATIN --poc-dir data/poc/vancouver --out-dir outputs/provider_approval_review/PROV-SATIN --reviewer "expert reviewer" --json`
+- `bc-nppd validate-provider-approvals outputs/provider_approval_review/PROV-SATIN/approval_manifest_draft.csv --json`
+
+P19.4 adds a static expert approval review app generated with:
+
+```bash
+bc-nppd build-provider-approval-review outputs/provider_sandbox_source_sweep/PROV-SATIN \
+  --poc-dir data/poc/vancouver \
+  --out-dir outputs/provider_approval_review/PROV-SATIN \
+  --reviewer "expert reviewer" \
+  --json
+```
+
+The live Satinflower seed sweep was run with:
+
+```bash
+bc-nppd scrape-provider-sandbox PROV-SATIN \
+  --database-instance vancouver \
+  --live-fetch \
+  --source-sweep \
+  --catalog-url https://satinflower.ca/collections/seed \
+  --max-pages 5 \
+  --raw-dir local/provider_raw \
+  --out-dir outputs/provider_sandbox_source_sweep/PROV-SATIN \
+  --json
+bc-nppd validate-provider-sandbox outputs/provider_sandbox_source_sweep/PROV-SATIN --json
+bc-nppd build-provider-review outputs/provider_sandbox_source_sweep/PROV-SATIN \
+  --out-dir outputs/provider_review_source_sweep/PROV-SATIN \
+  --json
+```
+
+## Phase 20: Satinflower Product Detail Extraction
+
+Parent issue: #115
+
+Branch: `feature/p20-satinflower-product-details`
+
+Status: complete
+
+Goal: extract Satinflower product-page `Plant Details` and `Seed Details`
+content into provider sandbox attributes so expert reviewers see the full
+product evidence, not only title/type/tag metadata.
+
+- [x] P20.1 Product body details into review attributes (#116)
+  - [x] Parse Shopify `body_html` description text.
+  - [x] Parse `Plant Details` table rows into candidate attributes.
+  - [x] Parse `Seed Details` table rows into candidate attributes.
+  - [x] Regenerate ignored Satinflower sandbox and approval-review outputs.
+  - [x] Run full acceptance and open PR (#117).
+  - [x] Merge after green CI and close issues.
+
+P20 issue records were created as parent issue #115 and child issue #116.
+
+Pull request #117 is the Phase 20 closeout PR against `main`.
+It passed CI for Python 3.11 and Python 3.12 and merged to `main` as merge
+commit `f334a08`.
+
+The regenerated Satinflower seed sweep now produces 115 candidate species,
+2,086 candidate attribute rows, 115 supplier rows, and 0 mowability rows. The
+approval-review draft contains 2,316 rows and validates cleanly.
+
+Phase 20 local verification passed with:
+
+- `python -m ruff check .`
+- `python -m pytest` (110 passed)
+- `sphinx-build -b html docs _build/html -W`
+- `python -m build`
+- `twine check dist/*`
+- `bc-nppd scrape-provider-sandbox PROV-SATIN --database-instance vancouver --live-fetch --source-sweep --catalog-url https://satinflower.ca/collections/seed --max-pages 5 --raw-dir local/provider_raw --out-dir outputs/provider_sandbox_source_sweep/PROV-SATIN --json`
+- `bc-nppd validate-provider-sandbox outputs/provider_sandbox_source_sweep/PROV-SATIN --json`
+- `bc-nppd build-provider-approval-review outputs/provider_sandbox_source_sweep/PROV-SATIN --poc-dir data/poc/vancouver --out-dir outputs/provider_approval_review/PROV-SATIN --reviewer "expert reviewer" --json`
+- `bc-nppd validate-provider-approvals outputs/provider_approval_review/PROV-SATIN/approval_manifest_draft.csv --json`
+
