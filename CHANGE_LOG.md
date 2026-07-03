@@ -611,3 +611,23 @@ with `ROADMAP.md`, planning notes, issue comments, and pull requests.
 - Verified pull request #134 passed CI for Python 3.11 and Python 3.12.
 - Merged pull request #134 to `main` as merge commit `da5537e`.
 - Closed Phase 27 as complete.
+- Started Phase 28 provider approval dedupe guardrails on
+  `feature/p28-provider-approval-dedupe`.
+- Created Phase 28 GitHub issue record: parent issue #135.
+- Diagnosed a duplicate provider-approval observation in the cumulative
+  Vancouver preview: Yarrow showed one Northwest Meadowscapes supplier row and
+  two identical Satinflower supplier rows.
+- Added deterministic dedupe keys for supplier availability, provisional
+  mowability, global source-attribution, and provider source-attribution rows
+  during provider approval application.
+- Added regression coverage proving duplicate supplier observations are
+  collapsed even when their approval IDs differ.
+- Rebuilt the cumulative Satinflower + Northwest Meadowscapes + West Coast
+  Seeds preview and confirmed Yarrow now has exactly two supplier rows: one NWM
+  and one Satinflower.
+- Validated the rebuilt cumulative preview: 345 plant rows, 365 sources, 3,748
+  source-attribution rows, 3,666 approval manifest rows, 3,665 approved
+  provider rows, 395 supplier rows, and 1 provisional mowability row.
+- Completed P28 local acceptance with Ruff, 122 pytest tests, Sphinx docs,
+  package build, and twine metadata check passing.
+- Opened pull request #136 for Phase 28 closeout.

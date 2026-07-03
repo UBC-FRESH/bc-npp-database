@@ -36,6 +36,7 @@ synchronized with GitHub issues, planning notes, pull requests, and
 | P25 Cumulative provider approval previews | #129 | `feature/p25-cumulative-provider-approvals` | Complete |
 | P26 Provider approval ID namespacing | #131 | `feature/p26-provider-approval-id-namespacing` | Complete |
 | P27 Usability provider filter layout fix | #133 | `feature/p27-usability-filter-layout` | Complete |
+| P28 Provider approval dedupe guardrails | #135 | `feature/p28-provider-approval-dedupe` | PR #136 |
 
 ## Phase 0: Bootstrap Scaffold
 
@@ -1473,6 +1474,65 @@ P27 local acceptance passed:
 
 - `python -m ruff check .`
 - `python -m pytest` (`121 passed`)
+- `sphinx-build -b html docs _build/html -W`
+- `python -m build`
+- `twine check dist/*`
+
+## Phase 28: Provider Approval Dedupe Guardrails
+
+Parent issue: #135
+
+Branch: `feature/p28-provider-approval-dedupe`
+
+Status: active
+
+Goal: make provider approval application idempotent enough to protect the
+Vancouver PoC preview from duplicate supplier, mowability, or source
+attribution rows when manifests are re-exported, re-applied, or contain repeated
+approval observations.
+
+Problem diagnosed: the cumulative provider-approved preview listed three
+supplier rows for Yarrow (`Achillea millefolium` / `BCNPPD-0001`): one
+Northwest Meadowscapes row and two identical Satinflower rows. The duplicate
+Satinflower row was already present in the applied approval inputs and the
+apply layer preserved it instead of collapsing the duplicate observation.
+
+- [x] Add deterministic dedupe keys for supplier availability rows.
+- [x] Add deterministic dedupe keys for provisional mowability rows.
+- [x] Add deterministic dedupe keys for global and provider source-attribution
+      claim rows.
+- [x] Add regression coverage for duplicate supplier observations whose
+      approval IDs differ.
+- [x] Rebuild the cumulative Satinflower + NWM + WCS preview.
+- [x] Confirm Yarrow has exactly one Satinflower supplier row and one NWM
+      supplier row.
+- [x] Confirm no duplicate supplier groups remain in the cumulative preview.
+- [x] Validate provider data, plant list, evidence hardening, usability, and
+      pollinator module outputs.
+- [x] Run full acceptance.
+- [x] Open PR (#136).
+- [ ] Merge after green CI and close issue.
+
+P28 cumulative preview command:
+
+- `scripts/apply-downloaded-provider-approval.cmd -ManifestPaths outputs/provider_approval_review/PROV-SATIN/approval_manifest.csv,outputs/provider_approval_review/PROV-NWM/approval_manifest.csv,outputs/provider_approval_review/PROV-WCS/approval_manifest.csv -PreviewDir outputs/provider_approved_vancouver`
+
+P28 cumulative preview counts:
+
+- 345 plant rows.
+- 365 sources.
+- 3,748 source-attribution rows.
+- 3,666 approval manifest rows.
+- 3,665 approved provider rows.
+- 395 supplier availability rows.
+- 1 provisional mowability row.
+- 345 usability plant-table rows.
+- 345 pollinator-review rows.
+
+P28 local acceptance passed:
+
+- `python -m ruff check .`
+- `python -m pytest` (`122 passed`)
 - `sphinx-build -b html docs _build/html -W`
 - `python -m build`
 - `twine check dist/*`

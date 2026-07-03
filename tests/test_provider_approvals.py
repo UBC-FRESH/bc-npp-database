@@ -152,6 +152,31 @@ def test_apply_provider_approval_sequence_namespaces_colliding_approval_ids(tmp_
     assert "provider_approval:PROV-PREMIER-PA-DRAFT-0001" in external_ids
 
 
+def test_apply_provider_approvals_deduplicates_supplier_rows(tmp_path):
+    poc_dir = _clean_poc_dir(tmp_path)
+    rows = _read_csv(APPROVALS)
+    supplier = next(row for row in rows if row["sandbox_table"] == "supplier_availability.csv")
+    duplicate = {**supplier, "approval_id": "PA-DUPLICATE-SUPPLIER"}
+    path = tmp_path / "duplicate_supplier.csv"
+    _write_csv(path, [supplier, duplicate])
+
+    result = apply_provider_approvals(
+        path,
+        poc_dir,
+        tmp_path / "vancouver",
+        regenerate_downstream=False,
+    )
+
+    assert not [diagnostic for diagnostic in result.diagnostics if diagnostic.severity == "error"]
+    suppliers = _read_csv(tmp_path / "vancouver" / "provider_data" / "supplier_availability.csv")
+    assert len(suppliers) == 1
+    attribution = _read_csv(tmp_path / "vancouver" / "provider_data" / "source_attribution.csv")
+    supplier_attribution = [
+        row for row in attribution if row["claim_field"] == "supplier_availability"
+    ]
+    assert len(supplier_attribution) == 1
+
+
 def test_provider_approval_validation_rejects_bad_status_and_mowability(tmp_path):
     path = tmp_path / "approval_manifest.csv"
     path.write_text(
