@@ -29,7 +29,7 @@ synchronized with GitHub issues, planning notes, pull requests, and
 | P18 Provider data usability layer | #103 | `feature/p18-provider-usability-layer` | Complete |
 | P19 Provider source sweep workflow | #109 | `feature/p19-provider-source-sweep` | Complete |
 | P20 Satinflower product detail extraction | #115 | `feature/p20-satinflower-product-details` | Complete |
-| P21 Downloaded provider approval runner | #118 | `feature/p21-downloaded-provider-approval-runner` | Active |
+| P21 Downloaded provider approval runner | #118 | `feature/p21-downloaded-provider-approval-runner` | Complete |
 
 ## Phase 0: Bootstrap Scaffold
 
@@ -1139,7 +1139,7 @@ Parent issue: #118
 
 Branch: `feature/p21-downloaded-provider-approval-runner`
 
-Status: active
+Status: complete
 
 Goal: provide a Liz-friendly downstream workflow after an expert downloads
 `approval_manifest.csv` from the static provider review app, while preserving
@@ -1159,7 +1159,10 @@ the auditable validation/apply/preview boundary.
   - [x] Roll approval-review batch controls and success-pattern notes into P21.
   - [x] Run focused verification and smoke test.
   - [x] Open PR (#122).
-  - [ ] Merge after green CI and close issues.
+  - [x] Merge after green CI and close issues.
+
+Pull request #122 passed CI for Python 3.11 and Python 3.12 and merged to
+`main` as merge commit `8921828`.
 
 P21 smoke verification used the downloaded manifest at
 `C:/Users/now25/Downloads/approval_manifest.csv` and generated an ignored
@@ -1182,4 +1185,3 @@ P21 local verification passed with:
 - `python -m build`
 - `twine check dist/*`
 - `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\apply-downloaded-provider-approval.ps1`
-

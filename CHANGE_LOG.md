@@ -488,3 +488,6 @@ with `ROADMAP.md`, planning notes, issue comments, and pull requests.
   package build, twine metadata check, and the downloaded-manifest smoke test
   passing.
 - Opened pull request #122 for Phase 21 closeout.
+- Verified pull request #122 passed CI for Python 3.11 and Python 3.12.
+- Merged pull request #122 to `main` as merge commit `8921828`.
+- Closed Phase 21 as complete.
