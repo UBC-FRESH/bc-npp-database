@@ -35,6 +35,7 @@ synchronized with GitHub issues, planning notes, pull requests, and
 | P24 West Coast Seeds source sweep | #127 | `feature/p24-west-coast-seeds-source-sweep` | Complete |
 | P25 Cumulative provider approval previews | #129 | `feature/p25-cumulative-provider-approvals` | Complete |
 | P26 Provider approval ID namespacing | #131 | `feature/p26-provider-approval-id-namespacing` | Complete |
+| P27 Usability provider filter layout fix | #133 | `feature/p27-usability-filter-layout` | PR #134 |
 
 ## Phase 0: Bootstrap Scaffold
 
@@ -1430,6 +1431,42 @@ P26 cumulative preview counts:
 - 345 pollinator-review rows.
 
 P26 local acceptance passed:
+
+- `python -m ruff check .`
+- `python -m pytest` (`121 passed`)
+- `sphinx-build -b html docs _build/html -W`
+- `python -m build`
+- `twine check dist/*`
+
+## Phase 27: Usability Provider Filter Layout Fix
+
+Parent issue: #133
+
+Branch: `feature/p27-usability-filter-layout`
+
+Status: PR #134
+
+Goal: fix the Vancouver usability app provider filters so checkbox controls are
+clearly labeled and do not render as large white boxes covering candidate-view
+pills.
+
+Problem diagnosed: the generated usability app applied global text-input CSS to
+all `input` elements. Provider filter checkboxes inherited search-input
+`min-width`, padding, border, and white background, producing large mysterious
+white boxes.
+
+- [x] Restrict search styling to `input[type="search"]`.
+- [x] Add explicit normal checkbox dimensions for provider filter toggles.
+- [x] Move provider filters into a labeled `Provider filters` band below the
+      candidate-view pills.
+- [x] Regenerate the tracked Vancouver usability app.
+- [x] Regenerate the cumulative provider-approved preview app.
+- [x] Validate tracked and cumulative-preview usability outputs.
+- [x] Run full acceptance.
+- [x] Open PR (#134).
+- [ ] Merge after green CI and close issue.
+
+P27 local acceptance passed:
 
 - `python -m ruff check .`
 - `python -m pytest` (`121 passed`)

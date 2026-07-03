@@ -531,7 +531,30 @@ def _render_html(
       align-items: center;
       padding: 16px 0;
     }}
-    input {{
+    .view-filters {{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      padding-bottom: 12px;
+    }}
+    .provider-filters {{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      width: 100%;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #f1f6f2;
+    }}
+    .filter-label {{
+      font-weight: 700;
+      color: var(--muted);
+      margin-right: 4px;
+    }}
+    input[type="search"] {{
       min-width: min(100%, 320px);
       padding: 10px 12px;
       border: 1px solid var(--line);
@@ -559,6 +582,14 @@ def _render_html(
       border: 1px solid var(--line);
       border-radius: 6px;
       background: var(--white);
+    }}
+    .toggle input[type="checkbox"] {{
+      width: 16px;
+      height: 16px;
+      min-width: 16px;
+      margin: 0;
+      padding: 0;
+      accent-color: var(--accent);
     }}
     .summary {{
       display: grid;
@@ -645,10 +676,15 @@ def _render_html(
       <div class="toolbar">
         <input id="search" type="search" aria-label="Search plants"
                placeholder="Search species, family, use case">
+      </div>
+      <div class="view-filters" aria-label="Candidate view filters">
         <button type="button" data-view="all" class="active">
           All <span>{len(table_rows)}</span>
         </button>
         {buttons}
+      </div>
+      <div class="provider-filters" aria-label="Provider data filters">
+        <span class="filter-label">Provider filters</span>
         <label class="toggle">
           <input type="checkbox" id="filter-supplier">
           Has supplier <span>{supplier_count}</span>

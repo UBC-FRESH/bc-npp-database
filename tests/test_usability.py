@@ -69,6 +69,9 @@ def test_static_html_is_self_contained_and_filterable():
 
     assert "<table" in html
     assert "data-view=\"dry_sun\"" in html
+    assert "Provider filters" in html
+    assert ".provider-filters" in html
+    assert '.toggle input[type="checkbox"]' in html
     assert 'id="filter-supplier"' in html
     assert 'id="filter-provider"' in html
     assert 'id="filter-mowability"' in html
