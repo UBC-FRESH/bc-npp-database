@@ -1,0 +1,80 @@
+# Dependency-free FreshForge workflow shape for provider source sweeps.
+# This file documents the intended orchestration contract; CI does not execute it
+# and FreshForge is not a package dependency.
+
+workflow:
+  id: p19_provider_source_sweep
+  provider: bc_npp_database
+  description: >
+    Sweep a provider catalogue into ignored sandbox outputs, validate the
+    normalized observations, and build a static review bundle for user approval.
+
+parameters:
+  provider_id: PROV-SATIN
+  database_instance: vancouver
+  catalog_url: https://satinflower.ca/collections/seed
+  max_pages: 5
+  raw_dir: local/provider_raw
+  sandbox_dir: outputs/provider_sandbox_source_sweep/PROV-SATIN
+  review_dir: outputs/provider_review_source_sweep/PROV-SATIN
+
+nodes:
+  - id: provider.source_sweep
+    command:
+      - bc-nppd
+      - scrape-provider-sandbox
+      - "${provider_id}"
+      - --database-instance
+      - "${database_instance}"
+      - --live-fetch
+      - --source-sweep
+      - --catalog-url
+      - "${catalog_url}"
+      - --max-pages
+      - "${max_pages}"
+      - --raw-dir
+      - "${raw_dir}"
+      - --out-dir
+      - "${sandbox_dir}"
+      - --json
+    outputs:
+      - "${sandbox_dir}/manifest.json"
+      - "${sandbox_dir}/candidate_species.csv"
+      - "${sandbox_dir}/candidate_attributes.csv"
+      - "${sandbox_dir}/supplier_availability.csv"
+      - "${sandbox_dir}/mowability.csv"
+
+  - id: provider.validate_sandbox
+    needs:
+      - provider.source_sweep
+    command:
+      - bc-nppd
+      - validate-provider-sandbox
+      - "${sandbox_dir}"
+      - --json
+
+  - id: provider.build_review
+    needs:
+      - provider.validate_sandbox
+    command:
+      - bc-nppd
+      - build-provider-review
+      - "${sandbox_dir}"
+      - --out-dir
+      - "${review_dir}"
+      - --json
+    outputs:
+      - "${review_dir}/index.html"
+      - "${review_dir}/manifest.json"
+
+public_hygiene:
+  raw_material_policy: >
+    Raw fetched catalogue JSON, HTML, screenshots, and caches stay under ignored
+    local/raw/output directories.
+  tracked_output_policy: >
+    Source-sweep outputs are review artifacts. Track only reviewed derivatives
+    or approval manifests in later phases.
+  evidence_policy: >
+    Provider observations are candidate supplier/cultivation clues. They are
+    not sole authority for native status, ecological scores, pollinator scores,
+    or planting recommendations.

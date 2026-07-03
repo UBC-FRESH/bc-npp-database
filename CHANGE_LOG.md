@@ -409,3 +409,18 @@ with `ROADMAP.md`, planning notes, issue comments, and pull requests.
 - Verified post-merge `main` CI and Docs/Pages deploy passed on closeout commit
   `89393e4`.
 - Closed Phase 18 as complete.
+- Started Phase 19 provider source sweep workflow on
+  `feature/p19-provider-source-sweep`.
+- Created Phase 19 GitHub issue records: parent issue #109 and child issues
+  #110 through #112.
+- Added targeted provider source-sweep support to `bc-nppd
+  scrape-provider-sandbox` with `--source-sweep` and `--catalog-url`.
+- Added a dependency-free FreshForge workflow shape for provider source sweeps.
+- Documented the Satinflower seed collection sweep in the provider sandbox docs.
+- Ran the Satinflower seed collection sweep from
+  `https://satinflower.ca/collections/seed` into ignored local/output
+  directories.
+- The Satinflower seed sweep caught 115 candidate species, 345 attribute rows,
+  115 supplier availability rows, and 0 mowability rows for review.
+- Completed focused Phase 19 verification with Ruff, provider tests, and
+  Sphinx docs passing.

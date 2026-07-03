@@ -73,6 +73,40 @@ P16 fixture-backed sandbox generation:
    bc-nppd scrape-provider-sandbox PROV-SATIN --input-dir tests/fixtures/providers --out-dir outputs/provider_sandbox/PROV-SATIN --json
    bc-nppd build-provider-review outputs/provider_sandbox/PROV-SATIN --out-dir outputs/provider_review/PROV-SATIN --json
 
+Targeted source sweep
+---------------------
+
+For user-testing or manual review, provider catalogues can be swept into an
+ignored sandbox directory. This is still a review workflow: rows are provider
+observations, not approved Vancouver PoC facts.
+
+The Satinflower seed-collection entrypoint is:
+
+.. code-block:: bash
+
+   bc-nppd scrape-provider-sandbox PROV-SATIN \
+     --database-instance vancouver \
+     --live-fetch \
+     --source-sweep \
+     --catalog-url https://satinflower.ca/collections/seed \
+     --max-pages 5 \
+     --raw-dir local/provider_raw \
+     --out-dir outputs/provider_sandbox_source_sweep/PROV-SATIN \
+     --json
+   bc-nppd validate-provider-sandbox outputs/provider_sandbox_source_sweep/PROV-SATIN --json
+   bc-nppd build-provider-review outputs/provider_sandbox_source_sweep/PROV-SATIN \
+     --out-dir outputs/provider_review_source_sweep/PROV-SATIN \
+     --json
+
+The source sweep currently supports Shopify-style product catalog feeds. Raw
+catalog JSON is written only under ``local/provider_raw``. Review CSV and HTML
+bundles are written under ``outputs`` and must remain untracked unless a later
+phase explicitly approves a public-safe derivative.
+
+The dependency-free FreshForge workflow shape for this process lives at
+``examples/p19_provider_source_sweep_freshforge.yaml``. It can be copied or
+overlaid per provider by changing ``provider_id`` and ``catalog_url``.
+
 Raw provider HTML, screenshots, downloads, and scrape caches must remain under
 ignored directories such as ``local/``, ``tmp/``, ``data/raw/``, or
 ``outputs/``.

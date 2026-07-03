@@ -192,6 +192,21 @@ def scrape_provider_sandbox_command(
         "--live-fetch",
         help="Fetch the provider homepage into ignored raw storage before parsing.",
     ),
+    source_sweep: bool = typer.Option(
+        False,
+        "--source-sweep",
+        help="Fetch supported provider catalogue feeds before parsing.",
+    ),
+    max_pages: int = typer.Option(
+        5,
+        "--max-pages",
+        help="Maximum catalogue pages to fetch for source-sweep mode.",
+    ),
+    catalog_url: str | None = typer.Option(
+        None,
+        "--catalog-url",
+        help="Provider collection or catalogue URL to use for source-sweep mode.",
+    ),
     raw_dir: Path = typer.Option(
         Path("local/provider_raw"),
         "--raw-dir",
@@ -206,6 +221,9 @@ def scrape_provider_sandbox_command(
         out_dir,
         input_dir=input_dir,
         live_fetch=live_fetch,
+        source_sweep=source_sweep,
+        max_pages=max_pages,
+        catalog_url=catalog_url,
         raw_dir=raw_dir,
     )
     if json_output:

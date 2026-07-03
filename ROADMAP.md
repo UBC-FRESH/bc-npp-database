@@ -27,6 +27,7 @@ synchronized with GitHub issues, planning notes, pull requests, and
 | P16 Provider scraping sandbox MVP | #91 | `feature/p16-provider-scraping-sandbox` | Complete |
 | P17 Approved provider data integration | #97 | `feature/p17-provider-approval-integration` | Complete |
 | P18 Provider data usability layer | #103 | `feature/p18-provider-usability-layer` | Complete |
+| P19 Provider source sweep workflow | #109 | `feature/p19-provider-source-sweep` | Active |
 
 ## Phase 0: Bootstrap Scaffold
 
@@ -74,6 +75,60 @@ Phase 0 local verification passed with:
 - `sphinx-build -b html docs _build/html -W`
 - `python -m build`
 - `twine check dist/*`
+
+## Phase 19: Provider Source Sweep Workflow
+
+Parent issue: #109
+
+Branch: `feature/p19-provider-source-sweep`
+
+Status: active
+
+Goal: run targeted provider catalogue sweeps into ignored sandbox/review
+outputs so the team can inspect the full candidate catch before approving any
+provider-derived data.
+
+- [x] P19.1 Targeted provider catalogue sweep CLI (#110)
+  - [x] Add `--source-sweep` mode to provider sandbox generation.
+  - [x] Add `--catalog-url` for provider-specific catalogue or collection entrypoints.
+  - [x] Preserve raw fetched catalogue JSON only under ignored `local/provider_raw`.
+- [x] P19.2 Satinflower seed review sandbox run (#111)
+  - [x] Run Satinflower from `https://satinflower.ca/collections/seed`.
+  - [x] Generate ignored sandbox outputs under `outputs/provider_sandbox_source_sweep/PROV-SATIN`.
+  - [x] Generate ignored review outputs under `outputs/provider_review_source_sweep/PROV-SATIN`.
+  - [x] Record catch counts: 115 candidate species, 345 attribute rows, 115 supplier rows, 0 mowability rows.
+- [x] P19.3 FreshForge template, docs, validation, and closeout (#112)
+  - [x] Add a dependency-free FreshForge workflow shape for provider source sweeps.
+  - [x] Document the Satinflower seed sweep workflow in user-facing docs.
+  - [x] Run focused Ruff, provider tests, and Sphinx docs verification.
+  - [ ] Open PR, merge after green CI, and close issues.
+
+P19 issue records were created as parent issue #109 and child issues #110
+through #112.
+
+Phase 19 focused verification passed with:
+
+- `python -m ruff check src/bc_npp_database/provider_scraping.py src/bc_npp_database/cli.py tests/test_provider_scraping.py`
+- `python -m pytest tests/test_provider_scraping.py tests/test_provider_cli.py` (13 passed)
+- `sphinx-build -b html docs _build/html -W`
+
+The live Satinflower seed sweep was run with:
+
+```bash
+bc-nppd scrape-provider-sandbox PROV-SATIN \
+  --database-instance vancouver \
+  --live-fetch \
+  --source-sweep \
+  --catalog-url https://satinflower.ca/collections/seed \
+  --max-pages 5 \
+  --raw-dir local/provider_raw \
+  --out-dir outputs/provider_sandbox_source_sweep/PROV-SATIN \
+  --json
+bc-nppd validate-provider-sandbox outputs/provider_sandbox_source_sweep/PROV-SATIN --json
+bc-nppd build-provider-review outputs/provider_sandbox_source_sweep/PROV-SATIN \
+  --out-dir outputs/provider_review_source_sweep/PROV-SATIN \
+  --json
+```
 
 Branch push completed for `feature/p0-bootstrap-scaffold`. Pull request #6 is
 the Phase 0 closeout PR against `main`.
