@@ -1158,7 +1158,8 @@ the auditable validation/apply/preview boundary.
   - [x] Add static tests for the workflow template, script, and docs.
   - [x] Roll approval-review batch controls and success-pattern notes into P21.
   - [x] Run focused verification and smoke test.
-  - [ ] Open PR, merge after green CI, and close issues.
+  - [x] Open PR (#122).
+  - [ ] Merge after green CI and close issues.
 
 P21 smoke verification used the downloaded manifest at
 `C:/Users/now25/Downloads/approval_manifest.csv` and generated an ignored

@@ -487,3 +487,4 @@ with `ROADMAP.md`, planning notes, issue comments, and pull requests.
 - Completed P21 local acceptance with Ruff, 113 pytest tests, Sphinx docs,
   package build, twine metadata check, and the downloaded-manifest smoke test
   passing.
+- Opened pull request #122 for Phase 21 closeout.
