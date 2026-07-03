@@ -30,7 +30,7 @@ synchronized with GitHub issues, planning notes, pull requests, and
 | P19 Provider source sweep workflow | #109 | `feature/p19-provider-source-sweep` | Complete |
 | P20 Satinflower product detail extraction | #115 | `feature/p20-satinflower-product-details` | Complete |
 | P21 Downloaded provider approval runner | #118 | `feature/p21-downloaded-provider-approval-runner` | Complete |
-| P22 Windows runner execution-policy shim | #123 | `feature/p22-windows-runner-shim` | Active |
+| P22 Windows runner execution-policy shim | #123 | `feature/p22-windows-runner-shim` | Complete |
 
 ## Phase 0: Bootstrap Scaffold
 
@@ -1193,7 +1193,7 @@ Parent issue: #123
 
 Branch: `feature/p22-windows-runner-shim`
 
-Status: active
+Status: complete
 
 Goal: make the downloaded provider approval runner work on Windows systems that
 block direct PowerShell script execution.
@@ -1203,7 +1203,10 @@ block direct PowerShell script execution.
 - [x] Update docs to recommend the `.cmd` command first.
 - [x] Run focused verification and `.cmd` smoke test.
 - [x] Open PR (#124).
-- [ ] Merge after green CI and close issue.
+- [x] Merge after green CI and close issue.
+
+Pull request #124 passed CI for Python 3.11 and Python 3.12 and merged to
+`main` as merge commit `905d9b3`.
 
 P22 smoke verification ran:
 
