@@ -166,6 +166,28 @@ def test_apply_provider_approvals_command_json(tmp_path):
     assert (tmp_path / "vancouver" / "provider_data" / "mowability.csv").exists()
 
 
+def test_apply_provider_approval_sequence_command_json(tmp_path):
+    result = runner.invoke(
+        app,
+        [
+            "apply-provider-approval-sequence",
+            "tests/fixtures/provider_approvals/approval_manifest.csv",
+            "--poc-dir",
+            "data/poc/vancouver",
+            "--out-dir",
+            str(tmp_path / "vancouver_sequence"),
+            "--skip-regeneration",
+            "--json",
+        ],
+    )
+
+    assert result.exit_code == 0
+    assert '"approved_rows": 4' in result.stdout
+    assert (
+        tmp_path / "vancouver_sequence" / "provider_data" / "supplier_availability.csv"
+    ).exists()
+
+
 def _write_minimal_sandbox(tmp_path) -> Path:
     sandbox = tmp_path / "sandbox"
     sandbox.mkdir()

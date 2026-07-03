@@ -204,9 +204,27 @@ def apply_provider_approvals(
     next_species_index = _next_numeric_id(plant_rows, "Species ID", "BCNPPD")
     next_legacy_index = _next_numeric_id(plant_rows, "Legacy ID", "CDF")
     source_registry = _source_registry(source_rows)
-    supplier_rows: list[dict[str, str]] = []
-    mowability_rows: list[dict[str, str]] = []
-    provider_attribution_rows: list[dict[str, str]] = []
+    provider_data_input = poc_dir / "provider_data"
+    existing_approval_rows = (
+        _load_csv(provider_data_input / "approval_manifest.csv", diagnostics)
+        if (provider_data_input / "approval_manifest.csv").exists()
+        else []
+    )
+    supplier_rows = (
+        _load_csv(provider_data_input / "supplier_availability.csv", diagnostics)
+        if (provider_data_input / "supplier_availability.csv").exists()
+        else []
+    )
+    mowability_rows = (
+        _load_csv(provider_data_input / "mowability.csv", diagnostics)
+        if (provider_data_input / "mowability.csv").exists()
+        else []
+    )
+    provider_attribution_rows = (
+        _load_csv(provider_data_input / "source_attribution.csv", diagnostics)
+        if (provider_data_input / "source_attribution.csv").exists()
+        else []
+    )
 
     for row in approved_rows:
         plant_row = _resolve_or_create_species(
@@ -323,7 +341,12 @@ def apply_provider_approvals(
     )
     provider_data_dir = output_dir / "provider_data"
     provider_data_dir.mkdir(parents=True, exist_ok=True)
-    _write_csv(provider_data_dir / "approval_manifest.csv", approval_rows, APPROVAL_FIELDS)
+    combined_approval_rows = [*existing_approval_rows, *approval_rows]
+    _write_csv(
+        provider_data_dir / "approval_manifest.csv",
+        combined_approval_rows,
+        APPROVAL_FIELDS,
+    )
     _write_csv(provider_data_dir / "supplier_availability.csv", supplier_rows, SUPPLIER_FIELDS)
     _write_csv(provider_data_dir / "mowability.csv", mowability_rows, MOWABILITY_FIELDS)
     _write_csv(
@@ -363,7 +386,7 @@ def apply_provider_approvals(
         )
 
     counts = {
-        "approval_manifest": len(approval_rows),
+        "approval_manifest": len(combined_approval_rows),
         "approved_rows": len(approved_rows),
         "plant_list": len(plant_rows),
         "sources": len(source_rows),
@@ -383,6 +406,51 @@ def apply_provider_approvals(
             **_provider_data_paths(provider_data_dir),
         },
     )
+
+
+def apply_provider_approval_sequence(
+    approvals_paths: list[Path],
+    poc_dir: Path,
+    output_dir: Path,
+    *,
+    regenerate_downstream: bool = True,
+) -> ProviderApprovalResult:
+    """Apply multiple approval manifests cumulatively to a Vancouver PoC directory."""
+    if not approvals_paths:
+        return ProviderApprovalResult(
+            str(output_dir),
+            _empty_counts(),
+            (
+                Diagnostic(
+                    code="approval_sequence_empty",
+                    message="At least one provider approval manifest is required.",
+                    severity=Severity.ERROR,
+                    field="approvals_paths",
+                ),
+            ),
+            {},
+        )
+
+    steps_dir = output_dir.parent / f".{output_dir.name}_approval_steps"
+    if steps_dir.exists():
+        shutil.rmtree(steps_dir)
+    steps_dir.mkdir(parents=True, exist_ok=True)
+
+    current_base = poc_dir
+    result = ProviderApprovalResult(str(output_dir), _empty_counts(), (), {})
+    for index, approvals_path in enumerate(approvals_paths, start=1):
+        is_last = index == len(approvals_paths)
+        step_output = output_dir if is_last else steps_dir / f"step_{index:02d}"
+        result = apply_provider_approvals(
+            approvals_path,
+            current_base,
+            step_output,
+            regenerate_downstream=regenerate_downstream if is_last else False,
+        )
+        if _has_errors(result.diagnostics):
+            return result
+        current_base = step_output
+    return result
 
 
 def has_error_diagnostics(diagnostics: tuple[Diagnostic, ...] | list[Diagnostic]) -> bool:

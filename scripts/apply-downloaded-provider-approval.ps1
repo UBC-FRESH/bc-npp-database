@@ -1,6 +1,7 @@
 param(
     [string]$ManifestPath = (Join-Path $HOME "Downloads\approval_manifest.csv"),
-    [string]$ProviderId = "PROV-SATIN",
+    [string[]]$ManifestPaths = @(),
+    [string]$ProviderId = "",
     [string]$PocDir = "data/poc/vancouver",
     [string]$PreviewDir = "outputs/provider_approved_vancouver",
     [switch]$SkipRegeneration,
@@ -27,32 +28,68 @@ function Invoke-BcNppdStep {
     }
 }
 
+function Get-ManifestProviderId {
+    param([string]$Path)
+    $rows = Import-Csv -LiteralPath $Path
+    $providerIds = @($rows | ForEach-Object { $_.provider_id } | Where-Object { $_ } | Sort-Object -Unique)
+    if ($providerIds.Count -eq 0) {
+        throw "Could not infer provider_id from '$Path'."
+    }
+    if ($providerIds.Count -gt 1) {
+        throw "Manifest '$Path' contains multiple provider_id values: $($providerIds -join ', '). Split it or pass one provider manifest at a time."
+    }
+    return $providerIds[0]
+}
+
 Push-Location $RepoRoot
 try {
-    if (-not (Test-Path -LiteralPath $ManifestPath)) {
-        throw "Approval manifest not found at '$ManifestPath'. Download approval_manifest.csv from the review app, or pass -ManifestPath."
+    if ($ManifestPaths.Count -eq 0) {
+        $ManifestPaths = @($ManifestPath)
     }
 
-    $ScratchDir = Join-Path "outputs/provider_approval_review" $ProviderId
-    $ScratchManifest = Join-Path $ScratchDir "approval_manifest.csv"
-    New-Item -ItemType Directory -Force -Path $ScratchDir | Out-Null
-    Copy-Item -LiteralPath $ManifestPath -Destination $ScratchManifest -Force
+    $ScratchManifests = @()
+    foreach ($InputManifest in $ManifestPaths) {
+        if (-not (Test-Path -LiteralPath $InputManifest)) {
+            throw "Approval manifest not found at '$InputManifest'. Download approval_manifest.csv from the review app, or pass -ManifestPath/-ManifestPaths."
+        }
+        $InferredProviderId = Get-ManifestProviderId -Path $InputManifest
+        if ($ProviderId -and $ProviderId -ne $InferredProviderId) {
+            throw "Manifest '$InputManifest' contains provider_id '$InferredProviderId', but -ProviderId was '$ProviderId'."
+        }
+        $ScratchDir = Join-Path "outputs/provider_approval_review" $InferredProviderId
+        $ScratchManifest = Join-Path $ScratchDir "approval_manifest.csv"
+        New-Item -ItemType Directory -Force -Path $ScratchDir | Out-Null
+        $inputResolved = (Resolve-Path -LiteralPath $InputManifest).Path
+        $scratchResolved = $null
+        if (Test-Path -LiteralPath $ScratchManifest) {
+            $scratchResolved = (Resolve-Path -LiteralPath $ScratchManifest).Path
+        }
+        if ($inputResolved -ne $scratchResolved) {
+            Copy-Item -LiteralPath $InputManifest -Destination $ScratchManifest -Force
+        }
+        $ScratchManifests += $ScratchManifest
+    }
 
     Write-Host "BC-NPPD provider approval preview" -ForegroundColor Green
-    Write-Host "Provider: $ProviderId"
-    Write-Host "Downloaded manifest: $ManifestPath"
-    Write-Host "Scratch manifest: $ScratchManifest"
+    Write-Host "Manifest count: $($ScratchManifests.Count)"
+    foreach ($ScratchManifest in $ScratchManifests) {
+        Write-Host "Scratch manifest: $ScratchManifest"
+    }
     Write-Host "Preview output: $PreviewDir"
 
-    Invoke-BcNppdStep "Validate downloaded approval manifest" @(
-        "validate-provider-approvals",
-        $ScratchManifest,
-        "--json"
-    )
+    foreach ($ScratchManifest in $ScratchManifests) {
+        Invoke-BcNppdStep "Validate approval manifest $ScratchManifest" @(
+            "validate-provider-approvals",
+            $ScratchManifest,
+            "--json"
+        )
+    }
 
     $ApplyArgs = @(
-        "apply-provider-approvals",
-        $ScratchManifest,
+        "apply-provider-approval-sequence"
+    )
+    $ApplyArgs += $ScratchManifests
+    $ApplyArgs += @(
         "--poc-dir",
         $PocDir,
         "--out-dir",
@@ -62,7 +99,7 @@ try {
     if ($SkipRegeneration) {
         $ApplyArgs += "--skip-regeneration"
     }
-    Invoke-BcNppdStep "Apply approvals into ignored preview product" $ApplyArgs
+    Invoke-BcNppdStep "Apply approvals cumulatively into ignored preview product" $ApplyArgs
 
     Invoke-BcNppdStep "Validate preview provider data" @(
         "validate-provider-approvals",
@@ -97,8 +134,7 @@ try {
     $SummaryPath = Join-Path $PreviewDir "provider_approval_preview_summary.txt"
     $summary = @(
         "BC-NPPD provider approval preview complete.",
-        "Provider: $ProviderId",
-        "Manifest: $ScratchManifest",
+        "Manifests: $($ScratchManifests -join ', ')",
         "Preview directory: $PreviewDir",
         "Preview app: $PreviewHtml",
         "Tracked product data was not modified."
