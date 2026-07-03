@@ -101,7 +101,8 @@ provider-derived data.
   - [x] Add a dependency-free FreshForge workflow shape for provider source sweeps.
   - [x] Document the Satinflower seed sweep workflow in user-facing docs.
   - [x] Run focused Ruff, provider tests, and Sphinx docs verification.
-  - [ ] Open PR, merge after green CI, and close issues.
+  - [x] Open PR and record the PR number (#114).
+  - [ ] Merge after green CI and close issues.
 - [x] P19.4 Expert provider review and approval interface (#113)
   - [x] Add a static approval-review app builder and CLI command.
   - [x] Generate `review_items.csv` and a valid `approval_manifest_draft.csv`.
@@ -110,6 +111,8 @@ provider-derived data.
 
 P19 issue records were created as parent issue #109 and child issues #110
 through #113.
+
+Pull request #114 is the Phase 19 closeout PR against `main`.
 
 Phase 19 focused verification passed with:
 
