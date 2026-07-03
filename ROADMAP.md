@@ -24,7 +24,7 @@ synchronized with GitHub issues, planning notes, pull requests, and
 | P13 Add Matricaria discoidea | #76 | `feature/p13-add-matricaria-discoidea` | Complete |
 | P14 Fill missing common names | #81 | `feature/p14-fill-common-names` | Complete |
 | P15 Source provider registry and sandbox contracts | #86 | `feature/p15-source-provider-registry` | Complete |
-| P16 Provider scraping sandbox MVP | TBD | `feature/p16-provider-scraping-sandbox` | Planned |
+| P16 Provider scraping sandbox MVP | #91 | `feature/p16-provider-scraping-sandbox` | Active |
 | P17 Approved provider data integration | TBD | `feature/p17-provider-approval-integration` | Planned |
 | P18 Provider data usability layer | TBD | `feature/p18-provider-usability-layer` | Planned |
 
@@ -865,19 +865,33 @@ Pull request #90 merged to `main` as merge commit `2a500f8`.
 
 ## Phase 16: Provider Scraping Sandbox MVP
 
-Parent issue: TBD
+Parent issue: #91
 
 Branch: `feature/p16-provider-scraping-sandbox`
 
-Status: planned
+Status: active
 
 Goal: add live-capable but CI-fixture-backed provider adapters that scrape or
 parse provider inventories into reviewable sandbox CSV and static HTML outputs.
 
-- [ ] P16.1 Provider fetch policy and adapters
-- [ ] P16.2 Inventory extraction and Vancouver eligibility filtering
-- [ ] P16.3 Sandbox CSV and static review table
-- [ ] P16.4 Verification, docs, and closeout
+- [ ] P16.1 Provider fetch policy and adapters (#92)
+  - [x] Create P16 implementation planning note.
+  - [ ] Add fixture-backed provider adapter interfaces.
+  - [ ] Keep live fetches optional and ignored-output only.
+- [ ] P16.2 Inventory extraction and Vancouver eligibility filtering (#93)
+  - [x] Fill mowability scoring planning note.
+  - [ ] Normalize provider observations into P15 sandbox tables.
+  - [ ] Apply Vancouver eligibility guardrails.
+- [ ] P16.3 Sandbox CSV and static review table (#94)
+  - [ ] Generate review CSV bundle.
+  - [ ] Generate static HTML review page.
+  - [ ] Validate generated sandbox outputs.
+- [ ] P16.4 Verification, docs, and closeout (#95)
+  - [ ] Add docs and tests.
+  - [ ] Run local acceptance.
+  - [ ] Open PR and record the PR number.
+  - [ ] Merge PR after green CI.
+  - [ ] Close issues after merge.
 
 P16 must not update `data/poc/vancouver`. Raw provider HTML, screenshots,
 downloads, and scrape caches remain ignored.

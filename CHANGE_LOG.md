@@ -342,3 +342,9 @@ with `ROADMAP.md`, planning notes, issue comments, and pull requests.
   before merge.
 - Merged pull request #90 to `main` as merge commit `2a500f8`.
 - Closed Phase 15 as complete.
+- Started Phase 16 provider scraping sandbox MVP on
+  `feature/p16-provider-scraping-sandbox`.
+- Created Phase 16 GitHub issue records: parent issue #91 and child issues
+  #92 through #95.
+- Added planning notes for provisional mowability scoring and the P16 provider
+  scraping sandbox implementation path before adding scraper code.
