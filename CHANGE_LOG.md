@@ -500,3 +500,4 @@ with `ROADMAP.md`, planning notes, issue comments, and pull requests.
 - Smoke-tested the `.cmd` wrapper against the downloaded Satinflower manifest:
   2,316 approved rows applied into the ignored preview, producing 152 plant rows
   and 115 supplier rows with all preview validators passing.
+- Opened pull request #124 for Phase 22 closeout.

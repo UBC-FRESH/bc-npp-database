@@ -1202,7 +1202,8 @@ block direct PowerShell script execution.
 - [x] Forward all arguments to the PowerShell runner with `-ExecutionPolicy Bypass`.
 - [x] Update docs to recommend the `.cmd` command first.
 - [x] Run focused verification and `.cmd` smoke test.
-- [ ] Open PR, merge after green CI, and close issue.
+- [x] Open PR (#124).
+- [ ] Merge after green CI and close issue.
 
 P22 smoke verification ran:
 
