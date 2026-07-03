@@ -37,7 +37,7 @@ synchronized with GitHub issues, planning notes, pull requests, and
 | P26 Provider approval ID namespacing | #131 | `feature/p26-provider-approval-id-namespacing` | Complete |
 | P27 Usability provider filter layout fix | #133 | `feature/p27-usability-filter-layout` | Complete |
 | P28 Provider approval dedupe guardrails | #135 | `feature/p28-provider-approval-dedupe` | Complete |
-| P29 Provider source sweep workflow overlays | #137 | `feature/p29-provider-workflow-overlays` | PR pending |
+| P29 Provider source sweep workflow overlays | #137 | `feature/p29-provider-workflow-overlays` | PR #141 |
 | P30 Premier Pacific source sweep | TBD | `feature/p30-premier-source-sweep` | Planned |
 | P31 One-command reviewed provider preview | TBD | `feature/p31-provider-preview-runner` | Planned |
 
@@ -1580,7 +1580,7 @@ bespoke package command sequencers.
   - [x] Update provider docs with the FreshForge-first one-command path and
         lower-level `bc-nppd` fallback.
   - [x] Run full local acceptance.
-  - [ ] Open PR after P29 tasks are complete.
+  - [x] Open PR (#141) after P29 tasks are complete.
   - [ ] Merge after green CI and close issue.
 
 P29 implemented interfaces:
