@@ -646,3 +646,20 @@ with `ROADMAP.md`, planning notes, issue comments, and pull requests.
   orchestrator reinventions inside BC-NPPD.
 - Recorded P30 Premier Pacific source sweep and P31 one-command reviewed
   provider preview as planned future phases, not active parallel branches.
+- Added a BC-NPPD FreshForge provider entry point, `bc_npp_database`, with
+  executable provider source-review nodes for source sweep, sandbox validation,
+  review-bundle generation, and expert approval-review generation.
+- Added canonical FreshForge workflow YAML files for provider source review,
+  including provider-specific workflows for Satinflower, Northwest Meadowscapes,
+  West Coast Seeds, and Premier Pacific.
+- Added `bc-nppd generate-provider-source-workflow` as a workflow authoring
+  helper that writes correctly shaped FreshForge YAML without executing it.
+- Added `scripts/build-provider-source-review.cmd` and PowerShell helper to run
+  FreshForge provider source-review workflows from Windows without bypassing the
+  FreshForge orchestration layer.
+- Updated provider docs with the FreshForge-first workflow path, the YAML
+  generator, and lower-level `bc-nppd` fallback commands.
+- Verified P29 with Ruff, 130 pytest tests, Sphinx docs, package build, twine
+  metadata check, FreshForge provider discovery, FreshForge workflow
+  validation, fixture-backed FreshForge execution, and the Windows launcher
+  smoke test.
