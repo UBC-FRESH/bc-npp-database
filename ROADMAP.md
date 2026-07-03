@@ -1234,7 +1234,9 @@ review boundary.
 - [x] Preserve `needs_northward_review` on all NWM candidate species.
 - [x] Generate ignored NWM sandbox, review, and approval-review outputs.
 - [x] Validate NWM sandbox and approval draft.
-- [ ] Run full acceptance, open PR, merge after green CI, and close issue.
+- [x] Run full acceptance.
+- [x] Open PR (#126).
+- [ ] Merge after green CI and close issue.
 
 P23 NWM source-sweep command:
 

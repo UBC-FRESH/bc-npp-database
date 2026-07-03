@@ -516,3 +516,7 @@ with `ROADMAP.md`, planning notes, issue comments, and pull requests.
   unique candidate species, 447 attribute rows, 208 supplier rows, 0 mowability
   rows, 19 existing PoC matches, 184 new candidates, and 858 draft approval
   rows.
+- Completed P23 local acceptance with Ruff, 116 pytest tests, Sphinx docs,
+  package build, twine metadata check, NWM sandbox validation, and NWM approval
+  draft validation passing.
+- Opened pull request #126 for Phase 23 closeout.
