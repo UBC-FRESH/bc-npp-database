@@ -116,6 +116,8 @@ Phase 19 focused verification passed with:
 - `python -m ruff check .`
 - `python -m pytest` (110 passed)
 - `sphinx-build -b html docs _build/html -W`
+- `python -m build`
+- `twine check dist/*`
 - `bc-nppd build-provider-approval-review outputs/provider_sandbox_source_sweep/PROV-SATIN --poc-dir data/poc/vancouver --out-dir outputs/provider_approval_review/PROV-SATIN --reviewer "expert reviewer" --json`
 - `bc-nppd validate-provider-approvals outputs/provider_approval_review/PROV-SATIN/approval_manifest_draft.csv --json`
 
