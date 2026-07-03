@@ -172,9 +172,12 @@ product evidence, not only title/type/tag metadata.
   - [x] Parse `Plant Details` table rows into candidate attributes.
   - [x] Parse `Seed Details` table rows into candidate attributes.
   - [x] Regenerate ignored Satinflower sandbox and approval-review outputs.
-  - [ ] Run full acceptance, open PR, merge after green CI, and close issues.
+  - [x] Run full acceptance and open PR (#117).
+  - [ ] Merge after green CI and close issues.
 
 P20 issue records were created as parent issue #115 and child issue #116.
+
+Pull request #117 is the Phase 20 closeout PR against `main`.
 
 The regenerated Satinflower seed sweep now produces 115 candidate species,
 2,086 candidate attribute rows, 115 supplier rows, and 0 mowability rows. The

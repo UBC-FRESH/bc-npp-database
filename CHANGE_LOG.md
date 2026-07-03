@@ -455,3 +455,4 @@ with `ROADMAP.md`, planning notes, issue comments, and pull requests.
   115 candidate species, 2,086 candidate attribute rows, 115 supplier rows, 0
   mowability rows, and a 2,316-row draft approval manifest that validates
   cleanly.
+- Opened pull request #117 for Phase 20 closeout.
