@@ -284,6 +284,11 @@ def apply_provider_approvals(
             attribution_rows.append(attribution)
             provider_attribution_rows.append(attribution)
 
+    attribution_rows = _dedupe_rows(attribution_rows, _ATTRIBUTION_KEY)
+    supplier_rows = _dedupe_rows(supplier_rows, _SUPPLIER_KEY)
+    mowability_rows = _dedupe_rows(mowability_rows, _MOWABILITY_KEY)
+    provider_attribution_rows = _dedupe_rows(provider_attribution_rows, _ATTRIBUTION_KEY)
+
     plant_rows = sorted(plant_rows, key=lambda row: row.get("Botanical Name", "").casefold())
     source_rows = sorted(source_rows, key=lambda row: row.get("source_id", ""))
     attribution_rows = sorted(
@@ -497,6 +502,33 @@ def _namespace_colliding_approval_ids(
             used_ids.add(approval_id)
         namespaced_rows.append(copied)
     return namespaced_rows
+
+
+def _dedupe_rows(
+    rows: list[dict[str, str]],
+    key_fields: tuple[str, ...],
+) -> list[dict[str, str]]:
+    seen: set[tuple[str, ...]] = set()
+    deduped: list[dict[str, str]] = []
+    for row in rows:
+        key = tuple(row.get(field, "") for field in key_fields)
+        if key in seen:
+            continue
+        seen.add(key)
+        deduped.append(row)
+    return deduped
+
+
+_SUPPLIER_KEY = ("species_id", "provider_id", "product_url", "supplier_status")
+_MOWABILITY_KEY = ("species_id", "provider_id", "source_url", "mowability_score")
+_ATTRIBUTION_KEY = (
+    "species_id",
+    "source_id",
+    "claim_field",
+    "claim_value",
+    "evidence_confidence",
+    "review_status",
+)
 
 
 def _validate_approval_rows(
