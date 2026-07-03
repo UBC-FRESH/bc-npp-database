@@ -28,7 +28,7 @@ synchronized with GitHub issues, planning notes, pull requests, and
 | P17 Approved provider data integration | #97 | `feature/p17-provider-approval-integration` | Complete |
 | P18 Provider data usability layer | #103 | `feature/p18-provider-usability-layer` | Complete |
 | P19 Provider source sweep workflow | #109 | `feature/p19-provider-source-sweep` | Complete |
-| P20 Satinflower product detail extraction | #115 | `feature/p20-satinflower-product-details` | Active |
+| P20 Satinflower product detail extraction | #115 | `feature/p20-satinflower-product-details` | Complete |
 
 ## Phase 0: Bootstrap Scaffold
 
@@ -161,7 +161,7 @@ Parent issue: #115
 
 Branch: `feature/p20-satinflower-product-details`
 
-Status: active
+Status: complete
 
 Goal: extract Satinflower product-page `Plant Details` and `Seed Details`
 content into provider sandbox attributes so expert reviewers see the full
@@ -173,11 +173,13 @@ product evidence, not only title/type/tag metadata.
   - [x] Parse `Seed Details` table rows into candidate attributes.
   - [x] Regenerate ignored Satinflower sandbox and approval-review outputs.
   - [x] Run full acceptance and open PR (#117).
-  - [ ] Merge after green CI and close issues.
+  - [x] Merge after green CI and close issues.
 
 P20 issue records were created as parent issue #115 and child issue #116.
 
 Pull request #117 is the Phase 20 closeout PR against `main`.
+It passed CI for Python 3.11 and Python 3.12 and merged to `main` as merge
+commit `f334a08`.
 
 The regenerated Satinflower seed sweep now produces 115 candidate species,
 2,086 candidate attribute rows, 115 supplier rows, and 0 mowability rows. The
