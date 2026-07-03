@@ -26,7 +26,7 @@ synchronized with GitHub issues, planning notes, pull requests, and
 | P15 Source provider registry and sandbox contracts | #86 | `feature/p15-source-provider-registry` | Complete |
 | P16 Provider scraping sandbox MVP | #91 | `feature/p16-provider-scraping-sandbox` | Complete |
 | P17 Approved provider data integration | #97 | `feature/p17-provider-approval-integration` | Complete |
-| P18 Provider data usability layer | #103 | `feature/p18-provider-usability-layer` | Active |
+| P18 Provider data usability layer | #103 | `feature/p18-provider-usability-layer` | Complete |
 
 ## Phase 0: Bootstrap Scaffold
 
@@ -978,7 +978,7 @@ Parent issue: #103
 
 Branch: `feature/p18-provider-usability-layer`
 
-Status: active
+Status: complete
 
 Goal: expose approved provider-derived supplier and mowability metadata in the
 static Vancouver PoC interface with filters, detail-panel provenance, and
@@ -996,17 +996,19 @@ explicit caveats.
   - [x] Embed provider data in plant detail JSON.
   - [x] Add supplier, provider-data, mowability, and provider-review filters.
   - [x] Add provider provenance detail-panel sections.
-- [ ] P18.4 Docs deploy hardening, validation, and closeout (#107)
+- [x] P18.4 Docs deploy hardening, validation, and closeout (#107)
   - [x] Add GitHub Pages configuration before artifact upload.
   - [x] Run local acceptance.
   - [x] Open PR and record the PR number (#108).
-  - [ ] Merge PR after green CI.
-  - [ ] Close issues after merge.
+  - [x] Merge PR after green CI.
+  - [x] Close issues after merge.
 
 P18 issue records were created as parent issue #103 and child issues #104
 through #107.
 
 Pull request #108 is the Phase 18 closeout PR against `main`.
+It passed CI for Python 3.11 and Python 3.12 and merged to `main` as merge
+commit `6280631`.
 
 Phase 18 local verification passed with:
 
