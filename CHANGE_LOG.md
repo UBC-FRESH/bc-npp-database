@@ -402,3 +402,4 @@ with `ROADMAP.md`, planning notes, issue comments, and pull requests.
 - Completed Phase 18 local acceptance verification with Ruff, pytest, provider
   approval validation, tracked Vancouver validators, Sphinx, build, and twine
   passing.
+- Opened pull request #108 for Phase 18 closeout.

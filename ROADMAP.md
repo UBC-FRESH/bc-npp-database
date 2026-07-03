@@ -999,12 +999,14 @@ explicit caveats.
 - [ ] P18.4 Docs deploy hardening, validation, and closeout (#107)
   - [x] Add GitHub Pages configuration before artifact upload.
   - [x] Run local acceptance.
-  - [ ] Open PR and record the PR number.
+  - [x] Open PR and record the PR number (#108).
   - [ ] Merge PR after green CI.
   - [ ] Close issues after merge.
 
 P18 issue records were created as parent issue #103 and child issues #104
 through #107.
+
+Pull request #108 is the Phase 18 closeout PR against `main`.
 
 Phase 18 local verification passed with:
 
