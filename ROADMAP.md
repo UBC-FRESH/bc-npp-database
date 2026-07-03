@@ -31,7 +31,7 @@ synchronized with GitHub issues, planning notes, pull requests, and
 | P20 Satinflower product detail extraction | #115 | `feature/p20-satinflower-product-details` | Complete |
 | P21 Downloaded provider approval runner | #118 | `feature/p21-downloaded-provider-approval-runner` | Complete |
 | P22 Windows runner execution-policy shim | #123 | `feature/p22-windows-runner-shim` | Complete |
-| P23 Northwest Meadowscapes source sweep | #125 | `feature/p23-nwm-source-sweep` | Active |
+| P23 Northwest Meadowscapes source sweep | #125 | `feature/p23-nwm-source-sweep` | Complete |
 
 ## Phase 0: Bootstrap Scaffold
 
@@ -1222,7 +1222,7 @@ Parent issue: #125
 
 Branch: `feature/p23-nwm-source-sweep`
 
-Status: active
+Status: complete
 
 Goal: deploy the provider source-sweep and approval-review workflow on
 Northwest Meadowscapes while preserving the required Vancouver/BC suitability
@@ -1236,7 +1236,10 @@ review boundary.
 - [x] Validate NWM sandbox and approval draft.
 - [x] Run full acceptance.
 - [x] Open PR (#126).
-- [ ] Merge after green CI and close issue.
+- [x] Merge after green CI and close issue.
+
+Pull request #126 passed CI for Python 3.11 and Python 3.12 and merged to
+`main` as merge commit `048f213`.
 
 P23 NWM source-sweep command:
 
