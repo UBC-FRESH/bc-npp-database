@@ -1655,7 +1655,7 @@ FreshForge workflow file while keeping live/raw/generated outputs ignored.
 - [ ] P30.3 Docs, tests, and closeout (#146)
   - [x] Update provider docs and tests.
   - [x] Run local acceptance.
-  - [ ] Open PR after P30 tasks are complete.
+  - [x] Open PR (#147) after P30 tasks are complete.
   - [ ] Merge after green CI and close issue.
 
 P30 source-review smoke generated ignored outputs:
