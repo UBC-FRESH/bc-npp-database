@@ -32,7 +32,7 @@ synchronized with GitHub issues, planning notes, pull requests, and
 | P21 Downloaded provider approval runner | #118 | `feature/p21-downloaded-provider-approval-runner` | Complete |
 | P22 Windows runner execution-policy shim | #123 | `feature/p22-windows-runner-shim` | Complete |
 | P23 Northwest Meadowscapes source sweep | #125 | `feature/p23-nwm-source-sweep` | Complete |
-| P24 West Coast Seeds source sweep | #127 | `feature/p24-west-coast-seeds-source-sweep` | PR #128 |
+| P24 West Coast Seeds source sweep | #127 | `feature/p24-west-coast-seeds-source-sweep` | Complete |
 
 ## Phase 0: Bootstrap Scaffold
 
@@ -1269,7 +1269,7 @@ Parent issue: #127
 
 Branch: `feature/p24-west-coast-seeds-source-sweep`
 
-Status: PR #128
+Status: complete
 
 Goal: deploy the provider source-sweep and approval-review workflow on West
 Coast Seeds while preserving strict review gates for commercial seed mixes,
@@ -1285,7 +1285,7 @@ vegetables, non-native wildflower components, and lawn material.
 - [x] Validate WCS sandbox and approval draft.
 - [x] Run full acceptance.
 - [x] Open PR (#128).
-- [ ] Merge after green CI and close issue.
+- [x] Merge after green CI and close issue.
 
 P24 local acceptance passed:
 
@@ -1296,6 +1296,9 @@ P24 local acceptance passed:
 - `sphinx-build -b html docs _build/html -W`
 - `python -m build`
 - `twine check dist/*`
+
+Pull request #128 passed CI for Python 3.11 and Python 3.12 and merged to
+`main` as merge commit `69e39fa`.
 
 P24 WCS source-sweep command:
 
