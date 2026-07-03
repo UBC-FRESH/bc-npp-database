@@ -594,3 +594,16 @@ with `ROADMAP.md`, planning notes, issue comments, and pull requests.
 - Verified pull request #132 passed CI for Python 3.11 and Python 3.12.
 - Merged pull request #132 to `main` as merge commit `8feac72`.
 - Closed Phase 26 as complete.
+- Started Phase 27 usability provider filter layout fix on
+  `feature/p27-usability-filter-layout`.
+- Created Phase 27 GitHub issue record: parent issue #133.
+- Diagnosed the four mysterious white boxes in the Vancouver usability app as
+  provider filter checkboxes inheriting global search-input CSS.
+- Restricted search styling to `input[type="search"]`, added explicit checkbox
+  dimensions, and moved provider filters into a labeled `Provider filters` band
+  below the candidate-view pills.
+- Regenerated the tracked Vancouver usability app and the cumulative
+  provider-approved preview app.
+- Validated tracked and cumulative-preview usability outputs.
+- Completed P27 local acceptance with Ruff, 121 pytest tests, Sphinx docs,
+  package build, and twine metadata check passing.
