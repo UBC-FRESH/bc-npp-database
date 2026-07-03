@@ -5,7 +5,9 @@ from __future__ import annotations
 import csv
 import html
 import json
+import re
 import shutil
+import time
 from dataclasses import dataclass
 from html.parser import HTMLParser
 from pathlib import Path
@@ -71,13 +73,25 @@ def scrape_provider_sandbox(
     *,
     input_dir: Path | None = None,
     live_fetch: bool = False,
+    source_sweep: bool = False,
+    max_pages: int = 5,
+    catalog_url: str | None = None,
     raw_dir: Path = Path("local/provider_raw"),
 ) -> ProviderScrapeResult:
     """Generate provider sandbox CSV artifacts from fixtures or optional live fetches."""
     output_dir.mkdir(parents=True, exist_ok=True)
     provider = _provider_record(provider_id)
     diagnostics: list[Diagnostic] = []
-    pages = _load_provider_pages(provider, input_dir, live_fetch, raw_dir, diagnostics)
+    pages = _load_provider_pages(
+        provider,
+        input_dir,
+        live_fetch,
+        source_sweep,
+        max_pages,
+        catalog_url,
+        raw_dir,
+        diagnostics,
+    )
     parsed_records = [_parse_provider_page(provider_id, page) for page in pages]
     tables = _build_sandbox_tables(provider_id, parsed_records, diagnostics)
     paths = _sandbox_paths(output_dir)
@@ -99,6 +113,8 @@ def scrape_provider_sandbox(
                 "external_downloads_required": live_fetch,
                 "private_data_tracked": False,
             },
+            "source_sweep": source_sweep,
+            "catalog_url": catalog_url or "",
             "caveat": "Provider scrape sandbox rows are observations pending review.",
         },
     )
@@ -206,6 +222,9 @@ def _load_provider_pages(
     provider: dict[str, object],
     input_dir: Path | None,
     live_fetch: bool,
+    source_sweep: bool,
+    max_pages: int,
+    catalog_url: str | None,
     raw_dir: Path,
     diagnostics: list[Diagnostic],
 ) -> list[dict[str, str]]:
@@ -220,6 +239,17 @@ def _load_provider_pages(
                     "fixture_path": str(path),
                     "html": path.read_text(encoding="utf-8"),
                     "fetch_status": "fixture",
+                    "page_type": "fixture",
+                }
+            )
+        for path in sorted(fixture_dir.glob("*.json")):
+            pages.append(
+                {
+                    "url": str(provider["homepage_url"]),
+                    "fixture_path": str(path),
+                    "json": path.read_text(encoding="utf-8"),
+                    "fetch_status": "fixture",
+                    "page_type": "shopify_products_json",
                 }
             )
         if not pages:
@@ -243,6 +273,15 @@ def _load_provider_pages(
         )
         return []
 
+    if source_sweep:
+        return _load_shopify_product_catalog_pages(
+            provider,
+            raw_dir,
+            diagnostics,
+            max_pages,
+            catalog_url,
+        )
+
     url = str(provider["homepage_url"])
     raw_dir.mkdir(parents=True, exist_ok=True)
     if not _robots_allows(url):
@@ -259,16 +298,102 @@ def _load_provider_pages(
     raw_path = raw_dir / provider_id / "homepage.html"
     raw_path.parent.mkdir(parents=True, exist_ok=True)
     raw_path.write_text(text, encoding="utf-8")
-    return [{"url": url, "html": text, "fetch_status": "fetched"}]
+    return [{"url": url, "html": text, "fetch_status": "fetched", "page_type": "homepage"}]
+
+
+def _load_shopify_product_catalog_pages(
+    provider: dict[str, object],
+    raw_dir: Path,
+    diagnostics: list[Diagnostic],
+    max_pages: int,
+    catalog_url: str | None,
+) -> list[dict[str, str]]:
+    provider_id = str(provider["provider_id"])
+    homepage_url = str(provider["homepage_url"]).rstrip("/")
+    catalog_base_url = (catalog_url or homepage_url).rstrip("/")
+    pages: list[dict[str, str]] = []
+    page_limit = max(1, min(max_pages, 25))
+    raw_root = raw_dir / provider_id
+    raw_root.mkdir(parents=True, exist_ok=True)
+    for page_number in range(1, page_limit + 1):
+        url = _shopify_catalog_page_url(catalog_base_url, page_number)
+        if not _robots_allows(url):
+            diagnostics.append(
+                _diagnostic(
+                    "provider_robots_disallowed",
+                    "Provider robots.txt does not allow the configured product catalogue URL.",
+                    field="catalog_url",
+                    value=url,
+                )
+            )
+            break
+        try:
+            text = _fetch_url(url)
+        except OSError as exc:
+            diagnostics.append(
+                _diagnostic(
+                    "provider_catalog_fetch_failed",
+                    "Provider product catalogue fetch failed.",
+                    field="catalog_url",
+                    value=f"{url}: {exc}",
+                )
+            )
+            break
+        raw_path = raw_root / f"products_page_{page_number:03d}.json"
+        raw_path.write_text(text, encoding="utf-8")
+        product_count = _shopify_product_count(text)
+        pages.append(
+            {
+                "url": url,
+                "json": text,
+                "fetch_status": "fetched_catalog",
+                "page_type": "shopify_products_json",
+            }
+        )
+        if product_count == 0:
+            break
+        if product_count < 250:
+            break
+        time.sleep(0.25)
+    if not pages:
+        diagnostics.append(
+            _diagnostic(
+                "provider_catalog_empty",
+                "Provider source sweep did not materialize any catalogue pages.",
+                Severity.WARNING,
+                field="provider_id",
+                value=provider_id,
+            )
+        )
+    return pages
+
+
+def _shopify_catalog_page_url(catalog_base_url: str, page_number: int) -> str:
+    base = catalog_base_url.rstrip("/")
+    separator = "&" if "?" in base else "?"
+    if base.endswith("products.json"):
+        return f"{base}{separator}limit=250&page={page_number}"
+    if "/collections/" in base:
+        return f"{base}/products.json?limit=250&page={page_number}"
+    return f"{base}/products.json?limit=250&page={page_number}"
 
 
 def _parse_provider_page(provider_id: str, page: dict[str, str]) -> dict[str, object]:
+    if page.get("json"):
+        return {
+            "provider_id": provider_id,
+            "page_url": page["url"],
+            "fetch_status": page["fetch_status"],
+            "page_type": page.get("page_type", "json"),
+            "records": _parse_shopify_products_json(provider_id, page["url"], page["json"]),
+        }
     parser = _ProviderSpeciesParser(provider_id, page["url"])
     parser.feed(page["html"])
     return {
         "provider_id": provider_id,
         "page_url": page["url"],
         "fetch_status": page["fetch_status"],
+        "page_type": page.get("page_type", "homepage"),
         "records": parser.records,
     }
 
@@ -290,7 +415,7 @@ def _build_sandbox_tables(
             {
                 "provider_id": provider_id,
                 "page_url": str(page["page_url"]),
-                "page_type": "fixture" if page["fetch_status"] == "fixture" else "homepage",
+                "page_type": str(page.get("page_type") or "fixture"),
                 "fetch_status": str(page["fetch_status"]),
                 "review_status": ReviewStatus.PENDING.value,
             }
@@ -383,6 +508,106 @@ def _attribute_records(record: dict[str, str]) -> list[tuple[str, str]]:
         if key.startswith("attribute_") and value:
             attributes.append((key.removeprefix("attribute_").replace("_", " "), value))
     return attributes
+
+
+def _parse_shopify_products_json(
+    provider_id: str,
+    catalog_url: str,
+    payload: str,
+) -> list[dict[str, str]]:
+    try:
+        data = json.loads(payload)
+    except json.JSONDecodeError:
+        return []
+    products = data.get("products", [])
+    if not isinstance(products, list):
+        return []
+    records: list[dict[str, str]] = []
+    for product in products:
+        if not isinstance(product, dict):
+            continue
+        title = str(product.get("title", "")).strip()
+        parsed = _parse_botanical_product_title(title)
+        if not parsed:
+            continue
+        botanical_name, common_name = parsed
+        handle = str(product.get("handle", "")).strip()
+        product_url = _product_url_from_catalog(catalog_url, handle)
+        tags = product.get("tags", [])
+        tag_text = ", ".join(str(tag) for tag in tags) if isinstance(tags, list) else str(tags)
+        product_type = str(product.get("product_type", "")).strip()
+        variants = product.get("variants", [])
+        supplier_status = "unknown"
+        if isinstance(variants, list) and variants:
+            has_available_variant = any(
+                variant.get("available") for variant in variants if isinstance(variant, dict)
+            )
+            supplier_status = "available" if has_available_variant else "unavailable"
+        records.append(
+            {
+                "botanical_name": botanical_name,
+                "common_name": common_name,
+                "source_url": product_url,
+                "product_category": product_type or tag_text,
+                "supplier_status": supplier_status,
+                "attribute_product_title": title,
+                "attribute_product_type": product_type,
+                "attribute_tags": tag_text,
+                "candidate_reason": _shopify_candidate_reason(provider_id),
+                "notes": "Source-sweep catalogue observation; pending user review.",
+            }
+        )
+    return records
+
+
+def _shopify_product_count(payload: str) -> int:
+    try:
+        data = json.loads(payload)
+    except json.JSONDecodeError:
+        return 0
+    products = data.get("products", [])
+    return len(products) if isinstance(products, list) else 0
+
+
+def _parse_botanical_product_title(title: str) -> tuple[str, str] | None:
+    match = re.match(
+        r"^\s*([A-Z][a-z-]+(?:\s+(?:x\s+)?[a-z][a-z.-]+){1,4})(?:\s+\(([^)]+)\))?",
+        title,
+    )
+    if not match:
+        return None
+    botanical_name = " ".join(match.group(1).replace(".", "").split())
+    common_name = (match.group(2) or "").strip()
+    if _looks_like_non_species_title(botanical_name):
+        return None
+    return botanical_name, common_name
+
+
+def _looks_like_non_species_title(botanical_name: str) -> bool:
+    first_word = botanical_name.split(maxsplit=1)[0].casefold()
+    return first_word in {
+        "gift",
+        "seeding",
+        "planting",
+        "native",
+        "custom",
+        "held",
+        "workshop",
+        "book",
+        "books",
+    }
+
+
+def _product_url_from_catalog(catalog_url: str, handle: str) -> str:
+    parsed = urlparse(catalog_url)
+    root = f"{parsed.scheme}://{parsed.netloc}"
+    return urljoin(root, f"/products/{handle}") if handle else catalog_url
+
+
+def _shopify_candidate_reason(provider_id: str) -> str:
+    if provider_id == "PROV-SATIN":
+        return "Satinflower catalogue product title parsed as a botanical species candidate."
+    return "Provider catalogue product title parsed as a botanical species candidate."
 
 
 def _vancouver_eligibility(provider_id: str, record: dict[str, str]) -> str:

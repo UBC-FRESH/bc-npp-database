@@ -69,6 +69,50 @@ def test_scrape_provider_sandbox_requires_fixture_or_live_fetch(tmp_path):
     assert any(diagnostic.code == "provider_input_required" for diagnostic in result.diagnostics)
 
 
+def test_scrape_provider_sandbox_parses_shopify_product_json_fixture(tmp_path):
+    fixture_dir = tmp_path / "fixtures" / "PROV-SATIN"
+    fixture_dir.mkdir(parents=True)
+    (fixture_dir / "products.json").write_text(
+        """
+        {
+          "products": [
+            {
+              "title": "Achillea millefolium (Yarrow)",
+              "handle": "achillea-millefolium",
+              "product_type": "Seed Packet",
+              "tags": ["native", "pollinator"],
+              "variants": [{"available": true}]
+            },
+            {
+              "title": "Gift Card",
+              "handle": "gift-card",
+              "product_type": "Gift Card",
+              "tags": [],
+              "variants": [{"available": true}]
+            }
+          ]
+        }
+        """,
+        encoding="utf-8",
+    )
+
+    result = scrape_provider_sandbox(
+        "PROV-SATIN",
+        "vancouver",
+        tmp_path / "sandbox",
+        input_dir=tmp_path / "fixtures",
+    )
+
+    assert result.diagnostics == ()
+    rows = _read_csv(tmp_path / "sandbox" / "candidate_species.csv")
+    assert [row["botanical_name"] for row in rows] == ["Achillea millefolium"]
+    assert rows[0]["source_url"] == "https://satinflower.ca/products/achillea-millefolium"
+    attributes = _read_csv(tmp_path / "sandbox" / "candidate_attributes.csv")
+    assert {row["attribute_name"] for row in attributes} >= {"product title", "tags"}
+    supplier = _read_csv(tmp_path / "sandbox" / "supplier_availability.csv")
+    assert supplier[0]["supplier_status"] == "available"
+
+
 def test_build_provider_review_creates_static_html_and_copies_csvs(tmp_path):
     scrape_provider_sandbox(
         "PROV-SATIN",
