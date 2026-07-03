@@ -348,3 +348,15 @@ with `ROADMAP.md`, planning notes, issue comments, and pull requests.
   #92 through #95.
 - Added planning notes for provisional mowability scoring and the P16 provider
   scraping sandbox implementation path before adding scraper code.
+- Added fixture-backed provider sandbox generation for all four configured
+  providers, with optional live-fetch plumbing that writes raw HTML only to
+  ignored local storage.
+- Added provider review bundle generation with static HTML and copied review
+  CSVs for user approval.
+- Added `bc-nppd scrape-provider-sandbox` and `bc-nppd build-provider-review`
+  CLI commands.
+- Added synthetic provider fixture HTML and tests for WCS vegetable exclusion,
+  NWM northward review, supplier rows, and provisional mowability rows.
+- Completed Phase 16 local acceptance verification with Ruff, pytest, provider
+  sandbox CLI checks, Sphinx, build, twine, and all Vancouver validators
+  passing.

@@ -874,27 +874,42 @@ Status: active
 Goal: add live-capable but CI-fixture-backed provider adapters that scrape or
 parse provider inventories into reviewable sandbox CSV and static HTML outputs.
 
-- [ ] P16.1 Provider fetch policy and adapters (#92)
+- [x] P16.1 Provider fetch policy and adapters (#92)
   - [x] Create P16 implementation planning note.
-  - [ ] Add fixture-backed provider adapter interfaces.
-  - [ ] Keep live fetches optional and ignored-output only.
-- [ ] P16.2 Inventory extraction and Vancouver eligibility filtering (#93)
+  - [x] Add fixture-backed provider adapter interfaces.
+  - [x] Keep live fetches optional and ignored-output only.
+- [x] P16.2 Inventory extraction and Vancouver eligibility filtering (#93)
   - [x] Fill mowability scoring planning note.
-  - [ ] Normalize provider observations into P15 sandbox tables.
-  - [ ] Apply Vancouver eligibility guardrails.
-- [ ] P16.3 Sandbox CSV and static review table (#94)
-  - [ ] Generate review CSV bundle.
-  - [ ] Generate static HTML review page.
-  - [ ] Validate generated sandbox outputs.
+  - [x] Normalize provider observations into P15 sandbox tables.
+  - [x] Apply Vancouver eligibility guardrails.
+- [x] P16.3 Sandbox CSV and static review table (#94)
+  - [x] Generate review CSV bundle.
+  - [x] Generate static HTML review page.
+  - [x] Validate generated sandbox outputs.
 - [ ] P16.4 Verification, docs, and closeout (#95)
-  - [ ] Add docs and tests.
-  - [ ] Run local acceptance.
+  - [x] Add docs and tests.
+  - [x] Run local acceptance.
   - [ ] Open PR and record the PR number.
   - [ ] Merge PR after green CI.
   - [ ] Close issues after merge.
 
 P16 must not update `data/poc/vancouver`. Raw provider HTML, screenshots,
 downloads, and scrape caches remain ignored.
+
+Phase 16 local verification passed with:
+
+- `python -m ruff check .`
+- `python -m pytest` (100 passed)
+- `bc-nppd scrape-provider-sandbox PROV-SATIN --input-dir tests/fixtures/providers --out-dir outputs/provider_sandbox/PROV-SATIN --json`
+- `bc-nppd validate-provider-sandbox outputs/provider_sandbox/PROV-SATIN --json`
+- `bc-nppd build-provider-review outputs/provider_sandbox/PROV-SATIN --out-dir outputs/provider_review/PROV-SATIN --json`
+- `sphinx-build -b html docs _build/html -W`
+- `python -m build`
+- `twine check dist/*`
+- `bc-nppd validate-vancouver-poc-list data/poc/vancouver --json`
+- `bc-nppd validate-vancouver-evidence data/poc/vancouver/evidence_hardening --json`
+- `bc-nppd validate-vancouver-usability data/poc/vancouver/usability --json`
+- `bc-nppd validate-vancouver-pollinator-module data/poc/vancouver/pollinator_module --json`
 
 ## Phase 17: Approved Provider Data Integration
 
