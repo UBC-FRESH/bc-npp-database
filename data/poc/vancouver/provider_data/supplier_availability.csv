@@ -1,2 +1,116 @@
 species_id,provider_id,botanical_name,supplier_status,product_url,source_id,review_status,notes
 BCNPPD-0001,PROV-SATIN,Achillea millefolium,available,https://satinflower.ca/products/achillea-millefolium,SRC-0002,pending_review,Demo supplier observation for user testing only.
+BCNPPD-0006,PROV-SATIN,Tellima grandiflora,available,https://satinflower.ca/products/tellima-grandiflora,SRC-0135,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0023,PROV-SATIN,Claytonia sibirica,available,https://satinflower.ca/products/claytonia-sibirica,SRC-0061,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0055,PROV-SATIN,Acmispon americanus,available,https://satinflower.ca/products/acmispon-americanus-spanish-clover,SRC-0037,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0056,PROV-SATIN,Alaska oniongrass,available,https://satinflower.ca/products/melica-subulata,SRC-0038,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0057,PROV-SATIN,American winter cress,available,https://satinflower.ca/products/american-winter-cress-barbarea-orthoceras,SRC-0039,pending_review,Taxonomy review recommended before approval.
+BCNPPD-0058,PROV-SATIN,Antennaria howellii,available,https://satinflower.ca/products/antennaria-howellii,SRC-0040,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0059,PROV-SATIN,Awl-fruited sedge,available,https://satinflower.ca/products/carex-stipata,SRC-0041,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0060,PROV-SATIN,Barestem desert-parsley,available,https://satinflower.ca/products/lomatium-nudicaule,SRC-0042,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0061,PROV-SATIN,Beach pea,available,https://satinflower.ca/products/lathyrus-japonicus,SRC-0043,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0062,PROV-SATIN,Beaked sedge,available,https://satinflower.ca/products/carex-utriculata-beaked-sedge,SRC-0044,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0063,PROV-SATIN,Bicoloured lupine,available,https://satinflower.ca/products/lupinus-bicolor,SRC-0045,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0064,PROV-SATIN,Blue wildrye,available,https://satinflower.ca/products/elymus-glaucus,SRC-0046,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0065,PROV-SATIN,Blue-eyed grass,available,https://satinflower.ca/products/sisyrinchium-idahoense,SRC-0047,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0066,PROV-SATIN,Broad-leaved shootingstar,available,https://satinflower.ca/products/primula-hendersonii,SRC-0048,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0067,PROV-SATIN,Broad-leaved stonecrop,available,https://satinflower.ca/products/sedum-spathulifolium,SRC-0049,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0068,PROV-SATIN,California aster,available,https://satinflower.ca/products/symphyotrichum-chilense,SRC-0050,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0069,PROV-SATIN,California brome,available,https://satinflower.ca/products/bromus-carinatus,SRC-0051,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0070,PROV-SATIN,California oatgrass,available,https://satinflower.ca/products/danthonia-californica,SRC-0052,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0071,PROV-SATIN,Canada goldenrod,available,https://satinflower.ca/products/solidago-lepida,SRC-0053,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0072,PROV-SATIN,Canada mint,available,https://satinflower.ca/products/mentha-canadensis,SRC-0054,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0073,PROV-SATIN,Carex lenticularis var lipocarpa,available,https://satinflower.ca/products/carex-lenticularis-var-lipocarpa,SRC-0055,pending_review,Taxonomy review recommended before approval.
+BCNPPD-0074,PROV-SATIN,Carex lyngbyei,available,https://satinflower.ca/products/carex-lyngbyei,SRC-0056,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0075,PROV-SATIN,Chamerion angustifolium ssp angustifolium,available,https://satinflower.ca/products/chamerion-angustifolium,SRC-0057,pending_review,Taxonomy review recommended before approval.
+BCNPPD-0076,PROV-SATIN,Chocolate lily,available,https://satinflower.ca/products/fritillaria-affinis,SRC-0058,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0077,PROV-SATIN,Clarkia amoena,available,https://satinflower.ca/products/clarkia-amoena,SRC-0059,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0078,PROV-SATIN,Claytonia perfoliata,unavailable,https://satinflower.ca/products/claytonia-perfoliata,SRC-0060,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0079,PROV-SATIN,Clustered tarweed,available,https://satinflower.ca/products/madia-glomerata,SRC-0062,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0080,PROV-SATIN,Coastal mugwort,available,https://satinflower.ca/products/artemisia-suksdorfii,SRC-0063,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0081,PROV-SATIN,Columbia brome,available,https://satinflower.ca/products/bromus-vulgaris,SRC-0064,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0082,PROV-SATIN,Common camas,available,https://satinflower.ca/products/camassia-quamash,SRC-0007,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0083,PROV-SATIN,Cow parsnip,available,https://satinflower.ca/products/cow-parsnip-heracleum-maximum,SRC-0065,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0084,PROV-SATIN,Crinkle-awned fescue,unavailable,https://satinflower.ca/products/festuca-subuliflora,SRC-0066,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0085,PROV-SATIN,Dagger-leaf rush,available,https://satinflower.ca/products/juncus-ensifolius,SRC-0067,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0086,PROV-SATIN,Death camas,available,https://satinflower.ca/products/toxicoscordion-venenosum,SRC-0068,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0087,PROV-SATIN,Delphinium menziesii,unavailable,https://satinflower.ca/products/delphinium-menziesii,SRC-0069,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0088,PROV-SATIN,Entire-leaved gumweed,available,https://satinflower.ca/products/grindelia-stricta,SRC-0070,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0089,PROV-SATIN,Eriocoma lemmonii,available,https://satinflower.ca/products/eriocoma-lemmonii,SRC-0071,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0090,PROV-SATIN,Festuca roemeri,available,https://satinflower.ca/products/festuca-roemeri,SRC-0072,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0091,PROV-SATIN,Few-flowered shootingstar,available,https://satinflower.ca/products/primula-pauciflora-var-pauciflora,SRC-0073,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0092,PROV-SATIN,Field chickweed,available,https://satinflower.ca/products/cerastium-arvense,SRC-0074,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0093,PROV-SATIN,Golden sedge,available,https://satinflower.ca/products/carex-aurea-golden-sedge,SRC-0075,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0094,PROV-SATIN,Graceful cinquefoil,available,https://satinflower.ca/products/potentilla-gracilis-var-gracilis,SRC-0076,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0095,PROV-SATIN,Great camas,available,https://satinflower.ca/products/camassia-leichtlinii,SRC-0077,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0096,PROV-SATIN,Green-sheathed sedge,available,https://satinflower.ca/products/carex-feta,SRC-0078,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0097,PROV-SATIN,Hairy gumweed,available,https://satinflower.ca/products/grindelia-hirsutula,SRC-0079,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0098,PROV-SATIN,Hare sedge,available,https://satinflower.ca/products/carex-ovalis,SRC-0080,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0099,PROV-SATIN,Harvest brodiaea,available,https://satinflower.ca/products/brodiaea-coronaria,SRC-0081,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0100,PROV-SATIN,Hypericum scouleri,available,https://satinflower.ca/products/hypericum-scouleri,SRC-0082,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0101,PROV-SATIN,Inflated sedge,available,https://satinflower.ca/products/carex-exsiccata,SRC-0083,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0102,PROV-SATIN,Jointed rush,available,https://satinflower.ca/products/juncus-articulatus,SRC-0084,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0103,PROV-SATIN,Juncus bolanderi,available,https://satinflower.ca/products/juncus-bolanderi,SRC-0085,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0104,PROV-SATIN,Koeleria macrantha,available,https://satinflower.ca/products/koeleria-macrantha,SRC-0086,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0105,PROV-SATIN,Large-flowered agoseris,available,https://satinflower.ca/products/agoseris-grandiflora,SRC-0087,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0106,PROV-SATIN,Large-flowered collomia,available,https://satinflower.ca/products/collomia-grandiflora-large-flowered-collomia,SRC-0088,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0107,PROV-SATIN,Large-leaved avens,available,https://satinflower.ca/products/geum-macrophyllum,SRC-0089,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0108,PROV-SATIN,Large-leaved lupine,available,https://satinflower.ca/products/lupinus-polyphyllus-ssp-pallidipes,SRC-0090,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0109,PROV-SATIN,Meadow barley,available,https://satinflower.ca/products/hordeum-brachyantherum,SRC-0091,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0110,PROV-SATIN,Melica harfordii,available,https://satinflower.ca/products/harfords-melic-melica-harfordii,SRC-0092,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0111,PROV-SATIN,Mountain sneezeweed,available,https://satinflower.ca/products/helenium-autumnale-var-grandiflorum,SRC-0093,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0112,PROV-SATIN,Mountain sweet-cicely,available,https://satinflower.ca/products/osmorhiza-berteroi,SRC-0094,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0113,PROV-SATIN,Navarretia squarrosa,available,https://satinflower.ca/products/navarretia-squarrosa,SRC-0095,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0114,PROV-SATIN,Nodding beggarticks,unavailable,https://satinflower.ca/products/bidens-cernua,SRC-0096,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0115,PROV-SATIN,Nodding onion,available,https://satinflower.ca/products/allium-cernuum,SRC-0097,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0116,PROV-SATIN,Olsynium douglasii,unavailable,https://satinflower.ca/products/olsynium-douglasii,SRC-0098,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0117,PROV-SATIN,One-sided sedge,available,https://satinflower.ca/products/carex-unilateralis,SRC-0099,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0118,PROV-SATIN,Oval-leaved mitrewort,available,https://satinflower.ca/products/mitella-ovalis,SRC-0100,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0119,PROV-SATIN,Pacific sanicle,available,https://satinflower.ca/products/sanicula-crassicaulis,SRC-0101,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0120,PROV-SATIN,Pacific water-parsley,available,https://satinflower.ca/products/oenanthe-sarmentosa,SRC-0102,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0121,PROV-SATIN,Pacific woodrush,available,https://satinflower.ca/products/luzula-comosa,SRC-0103,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0122,PROV-SATIN,Perideridia gairdneri,unavailable,https://satinflower.ca/products/perideridia-gairdneri,SRC-0104,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0123,PROV-SATIN,Plagiobothrys scouleri,unavailable,https://satinflower.ca/products/plagiobothrys-scouleri,SRC-0105,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0124,PROV-SATIN,Poa secunda,available,https://satinflower.ca/products/poa-secunda,SRC-0106,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0125,PROV-SATIN,Poverty oatgrass,available,https://satinflower.ca/products/danthonia-spicata,SRC-0107,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0126,PROV-SATIN,Prairie woodrush,available,https://satinflower.ca/products/luzula-subsessilis,SRC-0108,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0127,PROV-SATIN,Prunella vulgaris ssp lanceolata,available,https://satinflower.ca/products/prunella-vulgaris-ssp-lanceolata,SRC-0109,pending_review,Taxonomy review recommended before approval.
+BCNPPD-0128,PROV-SATIN,Red columbine,available,https://satinflower.ca/products/aquilegia-formosa,SRC-0110,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0129,PROV-SATIN,Red maids,available,https://satinflower.ca/products/calandrinia-ciliata,SRC-0111,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0130,PROV-SATIN,Sea blush,unavailable,https://satinflower.ca/products/plectritis-congesta,SRC-0112,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0131,PROV-SATIN,Sea thrift,unavailable,https://satinflower.ca/products/armeria-maritima,SRC-0113,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0132,PROV-SATIN,Seacoast angelica,available,https://satinflower.ca/products/seacoast-angelica-angelica-lucida,SRC-0114,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0133,PROV-SATIN,Seaside plantain,available,https://satinflower.ca/products/seaside-plantain-plantago-maritima,SRC-0115,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0134,PROV-SATIN,Shortspur sea blush,available,https://satinflower.ca/products/plectritis-brachystemon-shortspur-sea-blush,SRC-0116,pending_review,Taxonomy review recommended before approval.
+BCNPPD-0135,PROV-SATIN,Sidalcea hendersonii,available,https://satinflower.ca/products/sidalcea-hendersonii,SRC-0117,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0136,PROV-SATIN,Slender tarweed,available,https://satinflower.ca/products/madia-gracilis,SRC-0118,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0137,PROV-SATIN,Slender-foot sedge,available,https://satinflower.ca/products/carex-leptopoda,SRC-0119,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0138,PROV-SATIN,Slimleaf onion,available,https://satinflower.ca/products/allium-amplectens,SRC-0120,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0139,PROV-SATIN,Slough sedge,available,https://satinflower.ca/products/carex-obnupta,SRC-0121,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0140,PROV-SATIN,Small-flowered alumroot,available,https://satinflower.ca/products/heuchera-micrantha,SRC-0122,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0141,PROV-SATIN,Small-flowered blue-eyed mary,unavailable,https://satinflower.ca/products/collinsia-parviflora,SRC-0123,pending_review,Taxonomy review recommended before approval.
+BCNPPD-0142,PROV-SATIN,Small-flowered bulrush,available,https://satinflower.ca/products/scirpus-microcarpus,SRC-0124,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0143,PROV-SATIN,Small-flowered fiddleneck,available,https://satinflower.ca/products/amsinckia-menziesii-small-flowered-fiddleneck,SRC-0125,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0144,PROV-SATIN,Small-flowered lupine,available,https://satinflower.ca/products/lupinus-polycarpus-small-flowered-lupine,SRC-0126,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0145,PROV-SATIN,Small-flowered nemophila,available,https://satinflower.ca/products/nemophila-parviflora,SRC-0127,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0146,PROV-SATIN,Soft-stemmed bulrush,available,https://satinflower.ca/products/schoenoplectus-tabernaemontani,SRC-0128,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0147,PROV-SATIN,Spike bentgrass,available,https://satinflower.ca/products/agrostis-exarata-spike-bentgrass,SRC-0129,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0148,PROV-SATIN,Spring gold,unavailable,https://satinflower.ca/products/lomatium-utriculatum,SRC-0130,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0149,PROV-SATIN,Stachys chamissonis var cooleyae,available,https://satinflower.ca/products/stachys-chamissonis,SRC-0131,pending_review,Taxonomy review recommended before approval.
+BCNPPD-0150,PROV-SATIN,Sticky cinquefoil,available,https://satinflower.ca/products/drymocallis-glandulosa,SRC-0132,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0151,PROV-SATIN,Stinging nettle,available,https://satinflower.ca/products/urtica-dioica,SRC-0133,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0152,PROV-SATIN,Straight-beaked buttercup,available,https://satinflower.ca/products/ranunculus-orthorhynchus,SRC-0134,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0153,PROV-SATIN,Thick-headed sedge,available,https://satinflower.ca/products/carex-pachystachya,SRC-0136,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0154,PROV-SATIN,Tomcat clover,unavailable,https://satinflower.ca/products/trifolium-wildenowii,SRC-0137,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0155,PROV-SATIN,Tower mustard,available,https://satinflower.ca/products/turritis-glabra,SRC-0138,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0156,PROV-SATIN,Triteleia hyacinthina,available,https://satinflower.ca/products/triteleia-hyacinthina,SRC-0139,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0157,PROV-SATIN,Tufted hairgrass,available,https://satinflower.ca/products/deschampsia-cespitosa,SRC-0140,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0158,PROV-SATIN,Vari-leaved collomia,available,https://satinflower.ca/products/collomia-heterophylla,SRC-0141,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0159,PROV-SATIN,Western buttercup,available,https://satinflower.ca/products/ranunculus-occidentalis,SRC-0142,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0160,PROV-SATIN,Western fescue,available,https://satinflower.ca/products/festuca-occidentalis,SRC-0143,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0161,PROV-SATIN,Western rush,available,https://satinflower.ca/products/juncus-occidentalis,SRC-0144,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0162,PROV-SATIN,Western yellow cress,available,https://satinflower.ca/products/roripa-curvisiliqua,SRC-0145,pending_review,Taxonomy review recommended before approval.
+BCNPPD-0163,PROV-SATIN,White fawn lily,unavailable,https://satinflower.ca/products/erythronium-oregonum,SRC-0146,pending_review,Taxonomy review recommended before approval.
+BCNPPD-0164,PROV-SATIN,Woolly sunflower,available,https://satinflower.ca/products/eriophyllum-lanatum,SRC-0147,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0165,PROV-SATIN,Yellow monkey-flower,available,https://satinflower.ca/products/erythranthe-guttata,SRC-0148,pending_review,Draft supplier row; approve only with the species decision.
+BCNPPD-0166,PROV-SATIN,Yellow-eyed grass,available,https://satinflower.ca/products/sisyrinchium-californicum,SRC-0149,pending_review,Draft supplier row; approve only with the species decision.

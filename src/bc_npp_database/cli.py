@@ -869,3 +869,49 @@ def _emit_diagnostics(diagnostics: list[object], *, json_output: bool) -> None:
         typer.echo("Validation passed.")
     if any(diagnostic.severity.value == "error" for diagnostic in diagnostics):
         raise typer.Exit(code=1)
+import typer
+from pathlib import Path
+
+@app.command("generate-provider-workflow-templates")
+def generate_provider_workflow_templates_command(
+    out_dir: Path = typer.Option(
+        "examples/provider_workflows",
+        "--out-dir",
+        help="Output directory for generated workflow templates"
+    ),
+    reviewer: str = typer.Option(
+        "expert reviewer",
+        "--reviewer",
+        help="Reviewer name or role for draft approval rows.",
+    ),
+    database_instance: str = typer.Option("vancouver", "--database-instance"),
+    force: bool = typer.Option(False, "--force", help="Overwrite existing files."),
+) -> None:
+    """Generate FreshForge YAML workflow templates for the four default providers."""
+    from .provider_workflows import generate_provider_source_workflow
+    import os
+    
+    # The four default providers mentioned in the request
+    provider_ids = ["PROV-SATIN", "PROV-NWM", "PROV-WCS", "PROV-PREMIER"]
+    
+    # Ensure output directory exists
+    out_dir.mkdir(parents=True, exist_ok=True)
+    
+    # Generate workflow for each provider
+    for provider_id in provider_ids:
+        output_path = out_dir / f"{provider_id.lower()}_source_review.yaml"
+        
+        result = generate_provider_source_workflow(
+            provider_id,
+            output_path=output_path,
+            reviewer=reviewer,
+            database_instance=database_instance,
+            force=force,
+        )
+        
+        if result.diagnostics:
+            for diagnostic in result.diagnostics:
+                typer.echo(f"{diagnostic.severity.value}: {diagnostic.code}: {diagnostic.message}")
+            raise typer.Exit(code=1)
+        else:
+            typer.echo(f"Generated workflow template for {provider_id} at {output_path}
